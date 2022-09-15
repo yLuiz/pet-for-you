@@ -17,7 +17,7 @@ const User = mongoose.model(
       required: true
     },
     image: {
-      type: String,
+      type: String, 
     },
     phone: {
       type: String,
@@ -27,3 +27,5 @@ const User = mongoose.model(
   { timestamps: true },
 )
 )
+
+module.exports = User;

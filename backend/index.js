@@ -6,7 +6,7 @@ const server = express();
 server.use(express.json());
 server.use(cors({ credentials: true, origin: 'http://localhost:3333' }));
 
-// Public folder
+// Public folder 
 server.use(express.static('public'));
 
 // Routes
@@ -18,7 +18,7 @@ server.use('/users', UserRoutes);
 server.listen('5001', () => {
   console.log(`
     ==============================================
-    🚀API IS RUNNING IN http://localhost:5001/ 🚀
+    🚀 API IS RUNNING IN http://localhost:5001/ 🚀
     ==============================================
   `);
-})
+}) 
