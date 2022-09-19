@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const environment = require('../environment/environment');
-// const User = require('../models/user');
 
 const getUserByToken = async (token, User) => {
   const decoded = jwt.verify(token, environment.JWT_SECRET);

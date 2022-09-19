@@ -164,6 +164,11 @@ module.exports = class UserController {
     }
 
     const { name, email, password, confirmpassword, phone} = req.body
+    
+    if(req.file) {
+      userExists.image = req.file.filename;
+    }
+    
     const emailDuplicate = await User.findOne({ email });
 
     if(!name) {
@@ -210,7 +215,7 @@ module.exports = class UserController {
       return res.status(422).json({
         message: 'A confirmação de senha não corresponde a senha inserida!'
       });
-    } else if(password !== null && password === confirmpassword) {
+    } else if(password && password === confirmpassword) {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
 

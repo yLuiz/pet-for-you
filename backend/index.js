@@ -11,8 +11,10 @@ server.use(express.static('public'));
 
 // Routes
 
-const UserRoutes = require('./routes/UserRoutes')
+const UserRoutes = require('./routes/UserRoutes');
+const PetRoutes = require('./routes/PetRoutes');
 server.use('/users', UserRoutes);
+server.use('/pets', PetRoutes);
 
 
 server.listen('5001', () => {

@@ -32,3 +32,5 @@ const Pet = mongoose.model(
     { timestamps: true },
   )
 )
+
+module.exports = Pet;
