@@ -27,7 +27,8 @@ const Pet = mongoose.model(
       available: {
         type: Boolean
       },
-      user: Object
+      user: Object,
+      adopter: Object
     },
     { timestamps: true },
   )
