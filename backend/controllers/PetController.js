@@ -190,4 +190,59 @@ module.exports = class PetController {
 
     return res.status(200).json({ message: "Pet updated!", updatedPet });
   }
+
+  static async schedule(req, res) {
+    const _id = req.params.id;
+
+    const pet = await Pet.findOne({ _id });
+    if (!pet) return res.status(404).json({ message: "Pet não encontrado" });
+
+    const token = getToken(req);
+    const user = await getUserByToken(token, User);
+
+    // Check if the user is the owner of the pet, if so schedule is invalidated.
+    if (pet.user._id.equals(user._id)) return res.status(400).json({ message: "Você não pode agendar seu próprio pet!" });
+
+    // Check if user has already scheduled the pet, if so schedule is invalidated.
+    if(pet.adopter) {
+      if(pet.adopter._id.equals(user._id)) {
+        return res.status(400).json({ message: "Você já agendou uma visita com este pet!" });
+      }
+    }
+
+    pet.adopter = {
+      _id: user._id,
+      name: user.name,
+      image: user.image
+    }
+
+    await Pet.findByIdAndUpdate(_id, pet);
+
+    return res.status(200).json({ message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}!` });
+  }
+
+  static async concludeAdoption(req, res) {
+    const _id = req.params.id;
+
+    const pet = await Pet.findOne({ _id });
+    if (!pet) return res.status(404).json({ message: "Pet não encontrado" });
+
+    const token = getToken(req);
+    const currentUser = await getUserByToken(token, User);
+
+    const isUserPet = pet.user._id.toString() === currentUser._id.toString();
+    const isAdoptPet = pet.adopter._id.equals(currentUser._id);
+
+    if (isUserPet || !isAdoptPet) {
+      return res
+        .status(422)
+        .json({ message: "Você não pode concluir uma adoção que não fez agendamento!" });
+    }
+
+    pet.available = false;
+    await Pet.findByIdAndUpdate(_id, pet);
+
+    res.status(200).json({ message: "O pet foi adotado com sucesso!" });
+  }
+
 };
