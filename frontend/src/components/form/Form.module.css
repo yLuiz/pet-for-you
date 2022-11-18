@@ -1,5 +1,6 @@
 .form_container {
   margin: 0 auto;
+  margin-bottom: 80px;
   flex-direction: column;
   align-items: center;
   max-width: 420px;
@@ -37,6 +38,29 @@
   color: #FFF;
   font-size: 0.95rem;
   cursor: pointer;
+}
+
+.form_container p {
+  margin-top: 1em;
+}
+
+.form_container p a {
+  color: #16479d;
+  font-weight: bold;
+}
+
+/* form de pets */
+.preview_pet_images {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.preview_pet_images img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-left: 1em;
 }
 
 @media (max-width: 460px) {

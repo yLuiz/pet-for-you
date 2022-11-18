@@ -1,9 +1,14 @@
+:root {
+  --text-color: #fff3f3;
+  --bg-color: #2164d8;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em;
-  background-color: #FFD400;
-  color: #16479d;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .navbar_logo {
@@ -12,8 +17,8 @@
 }
 
 .navbar_logo img {
-  width: 40px;
-  margin-right: .8em;
+  width: 30px;
+  margin: 0 .8em;
 }
 
 .navbar ul {
@@ -26,7 +31,7 @@
 .navbar li,
 .navbar a {
   text-decoration: none;
-  color: #16479d;
+  color: var(--text-color);
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
@@ -35,12 +40,12 @@
 }
 
 .navbar li:hover {
-  background-color: #16479d;
-  color: #FFF;
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }
 
 .navbar li:hover > a {
-  color: #FFF;
+  color: var(--bg-color);
 }
 
 @media (max-width: 600px) {

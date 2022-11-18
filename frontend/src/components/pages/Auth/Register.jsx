@@ -1,9 +1,10 @@
-import Input from "../../form/Input";
-import styles from '../../form/Form.module.css';
-import { Link } from 'react-router-dom';
-import { useContext, useState } from "react";
 
-import { Context, UserProvider } from "../../../context/UserContext";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../../form/Form.module.css';
+import Input from "../../form/Input";
+
+import { Context } from "../../../context/UserContext";
 
 export default function Register() {
   const [user, setUser] = useState();
