@@ -1,3 +1,7 @@
+:root {
+  --text-color: #2164d8;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,13 +10,17 @@
 }
 
 h1 {
-  color: #16479D;
+  color: #2164d8;
   margin-bottom: 1em;
   font-size: 2.1em;
 }
 
+input:not([type= "submit"]):focus {
+  outline-color: #2164d8;
+}
+
 .bold {
   font-weight: bold;
-  color: #16479D;
+  color: #2164d8;
 }
 

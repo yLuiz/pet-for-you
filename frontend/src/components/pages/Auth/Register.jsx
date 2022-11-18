@@ -17,7 +17,6 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault()
     register(user)
-    console.log(user)
   }
 
   return (

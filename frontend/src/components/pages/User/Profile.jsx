@@ -8,8 +8,12 @@ import Input from '../../form/Input';
 import RoundedImage from '../../layout/RoundedImage';
 import styles from './Profile.module.css';
 
+import { Context } from '../../../context/UserContext';
+import { useContext } from 'react';
+
 export default function Profile() {
 
+  const { authenticated } = useContext(Context);
   const [user, setUser] = useState({});
   const [preview, setPreview] = useState();
   const [token] = useState(localStorage.getItem('token' || ''));
@@ -17,13 +21,18 @@ export default function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get('/users/checkuser', {
-      headers: { 
-        'Authorization': `Bearer ${JSON.parse(token)}`
-      }
-    }).then(response => {
-      setUser(response.data.data);
-    })
+
+    if(!authenticated) navigate('/login');
+
+    else {
+      api.get('/users/checkuser', {
+        headers: { 
+          'Authorization': `Bearer ${JSON.parse(token)}`
+        }
+      }).then(response => {
+        setUser(response.data.data);
+      })
+    }
   }, [token])
 
   function handleChange(e) {

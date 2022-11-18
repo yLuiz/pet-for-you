@@ -3,6 +3,13 @@
   padding: 1em;
   border: 1px solid #000;
   margin: 0 auto;
+  
+  position: absolute;
+  top: 40px;
+
+  left: -50%;
+  right: -50%;
+
   text-align: center;
   max-width: 60%;
   margin: 1em auto;
@@ -10,13 +17,13 @@
 }
 
 .success {
-  color: #155724;
-  background-color: #d4edda;
+  color: #155624;
+  background-color: #d4eddab3;
   border-color: #c3e6cb;
 }
 
 .error {
   color: #721c24;
-  background-color: #f8d7da;
+  background-color: #f8d7dab3;
   border-color: #f5c6cb;
 }

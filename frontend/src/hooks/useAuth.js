@@ -14,6 +14,8 @@ export default function useAuth() {
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
   }, []);
   
@@ -32,8 +34,8 @@ export default function useAuth() {
       msgText = err.response.data.message;
       msgType = "error";
 
-      console.log(err)
-      console.log(user)
+      console.log(err);
+      console.log(user);
 
       setFlashMessage(msgText, msgType);
     }
@@ -69,7 +71,7 @@ export default function useAuth() {
     setAuthenticated(false);
     localStorage.removeItem('token');
     api.defaults.Authorization = undefined;
-    navigate('/');
+    navigate('/login');
 
     setFlashMessage(msgText, msgType);
   }
