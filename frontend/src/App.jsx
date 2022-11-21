@@ -18,6 +18,7 @@ import Profile from './components/pages/User/Profile';
 import MyPets from './components/pages/Pet/MyPets';
 import { UserProvider } from './context/UserContext';
 import AddPet from './components/pages/Pet/AddPet';
+import EditPet from './components/pages/Pet/EditPet';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path='/allUsers' element={ <Navigate to="/users" />}></Route>
               <Route path='/pet/mypets' element={ <MyPets /> }></Route>
               <Route path='/pet/add' element={ <AddPet /> }></Route>
+              <Route path='/pet/edit/:id' element={ <EditPet /> }></Route>
             </Routes>
           </Container>
           <Footer />

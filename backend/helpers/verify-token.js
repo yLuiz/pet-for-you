@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    console.log(token);
+    // console.log(token);
     const decoded = jwt.verify(token, environment.JWT_SECRET);
     if (!decoded) {
       return res.status(401).send({ message: 'Unauthorized' });

@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
 import Input from '../../form/Input';
 
-import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from '../../../context/UserContext';
 import styles from '../../form/Form.module.css';
+
 
 export default function Login() {
 
   const [user, setUser] = useState({});
   const { login } = useContext(Context);
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setUser({...user, [e.target.name]: e.target.value});
@@ -18,6 +21,13 @@ export default function Login() {
     e.preventDefault();
     login(user);
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      navigate('/');
+    }
+  }, [])
 
   return (
     <section className={styles.form_container}>

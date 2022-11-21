@@ -1,5 +1,8 @@
 :root {
-  --text-color: #2164d8;
+  --text-white-color: #fff3f3;
+  --text-bg-color: #2164d8;
+  --bg-color: #2164d8;
+  --bg-color-opacity-95: rgba(33, 100, 216, 0.95);
 }
 
 * {
@@ -10,17 +13,16 @@
 }
 
 h1 {
-  color: #2164d8;
+  color: var(--text-bg-color);
   margin-bottom: 1em;
   font-size: 2.1em;
 }
 
 input:not([type= "submit"]):focus {
-  outline-color: #2164d8;
+  outline-color: var(--text-bg-color);
 }
 
 .bold {
   font-weight: bold;
-  color: #2164d8;
+  color: var(--text-bg-color);
 }
-

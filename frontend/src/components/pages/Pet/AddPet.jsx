@@ -12,25 +12,25 @@ export default function AddPet() {
   const navigate = useNavigate();
 
   async function registerPet(pet) {
-    let msgType = "success";
-
     const formData =  new FormData(); 
     Object.keys(pet).forEach(key => {
-      if(key === 'image') {
-        for(let i = 0; i < pet.length; i++) {
+      if(key === 'images') {
+        for(let i = 0; i < pet[key].length; i++) {
           formData.append('images', pet[key][i]);
+          console.log(pet[key][i])
         }
       } else {
         formData.append(key, pet[key]);
       }
     })
-
-    const data = await api.post('pets/register', formData, {
+    await api.post('pets/register', formData, 
+    /* {
       headers: {
         'Authorization': `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
       }
-    }).then(response => {
+    } */
+    ).then(response => {
       setFlashMessage(response.data.message, "success"); 
       navigate('/pet/mypets');
       return response.data.data;

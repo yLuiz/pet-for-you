@@ -4,6 +4,7 @@ import Input from './Input'
 import Select from './Select'
 import formStyles from './Form.module.css';
 import environment from '../../environment/environment';
+import { Link } from 'react-router-dom';
 
 export default function PertForm({ handleSubmit, petData, btnText }) {
 
@@ -12,6 +13,7 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
   function onFileChange(e) {
+    console.log(preview);
     setPet({...pet, images: [...e.target.files]});
     setPreview([...e.target.files]);
   }
@@ -28,6 +30,8 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
     event.preventDefault();
     handleSubmit(pet)
   }
+
+  console.log(pet)
 
   return (
     <div
@@ -101,6 +105,7 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
           />
 
           <input type="submit" value="Cadastrar Pet" />
+          <Link className={formStyles.backButton} to="/pet/mypets">Voltar</Link>
         </div>
       </form>
     </div>
