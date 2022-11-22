@@ -71,14 +71,19 @@
   font-size: 12px;
 }
 
+.actions a:hover,
+.actions button:hover {
+  background-color: var(--text-bg-color);
+  color: #fff;
+}
+
 .actions .delete {
   border: 2px solid #d82121;
   color: #d82121;
 }
 
-.actions a:hover,
-.actions button:hover {
-  background-color: var(--text-bg-color);
+.actions .delete:hover {
+  background-color: #d82121;
   color: #fff;
 }
 

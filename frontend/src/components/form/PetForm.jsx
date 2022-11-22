@@ -13,7 +13,6 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
   function onFileChange(e) {
-    console.log(preview);
     setPet({...pet, images: [...e.target.files]});
     setPreview([...e.target.files]);
   }

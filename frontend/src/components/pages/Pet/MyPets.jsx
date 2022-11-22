@@ -18,18 +18,15 @@ export default function MyPets() {
   useEffect(() => {
 
     (async function request() {
-      await api.get('/pets/mypets', /* { 
+      await api.get('/pets/mypets', { 
         headers: {
           'Authorization': `Bearer ${JSON.parse(token)}`
         }
-      } */
+      }
       ).then(response => {
         setPets(response.data.userPets);
       })
     }())
-
-    console.log('Rendered')
-
 
     if(!token) navigate('/login');
   }, [token])

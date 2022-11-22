@@ -203,7 +203,7 @@ module.exports = class PetController {
     // Check if the user is the owner of the pet, if so schedule is invalidated.
     if (pet.user._id.equals(user._id)) return res.status(400).json({ message: "Você não pode agendar seu próprio pet" });
 
-    // Check if user has already scheduled the pet, if so schedule is invalidated.
+    // Check if user has already scheduled the pet and if so, schedule is invalidated.
     if(pet.adopter) {
       if(pet.adopter._id.equals(user._id)) {
         return res.status(400).json({ message: "Você já agendou uma visita com este pet" });

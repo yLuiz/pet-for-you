@@ -23,13 +23,12 @@ export default function AddPet() {
         formData.append(key, pet[key]);
       }
     })
-    await api.post('pets/register', formData, 
-    /* {
+    await api.post('pets/register', formData, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
       }
-    } */
+    }
     ).then(response => {
       setFlashMessage(response.data.message, "success"); 
       navigate('/pet/mypets');

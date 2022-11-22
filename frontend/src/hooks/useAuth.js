@@ -33,7 +33,6 @@ export default function useAuth() {
       msgType = "error";
 
       console.log(err);
-      console.log(user);
 
       setFlashMessage(msgText, msgType);
     }

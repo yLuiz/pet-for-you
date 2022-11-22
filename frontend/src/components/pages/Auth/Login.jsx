@@ -22,12 +22,12 @@ export default function Login() {
     login(user);
   }
 
+  const token = localStorage.getItem('token');
   useEffect(() => {
-    const token = localStorage.getItem('token');
     if(token) {
       navigate('/');
     }
-  }, [])
+  }, [token])
 
   return (
     <section className={styles.form_container}>

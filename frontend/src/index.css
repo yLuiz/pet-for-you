@@ -1,6 +1,7 @@
 :root {
   --text-white-color: #fff3f3;
   --text-bg-color: #2164d8;
+  --bg-color-dark-1: #0048c5;
   --bg-color: #2164d8;
   --bg-color-opacity-95: rgba(33, 100, 216, 0.95);
 }
