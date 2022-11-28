@@ -227,22 +227,12 @@ module.exports = class PetController {
     const pet = await Pet.findOne({ _id });
     if (!pet) return res.status(404).json({ message: "Pet não encontrado" });
 
-    const token = getToken(req);
-    const currentUser = await getUserByToken(token, User);
-
-    const isUserPet = pet.user._id.toString() === currentUser._id.toString();
-    const isAdoptPet = pet.adopter._id.equals(currentUser._id);
-
-    if (isUserPet || !isAdoptPet) {
-      return res
-        .status(422)
-        .json({ message: "Você não pode concluir uma adoção que não fez agendamento" });
-    }
-
     pet.available = false;
     await Pet.findByIdAndUpdate(_id, pet);
 
-    res.status(200).json({ message: "O pet foi adotado com sucesso" });
+    res.status(200).json({ 
+      message: "O pet foi adotado com sucesso",
+      pet
+    });
   }
-
 };

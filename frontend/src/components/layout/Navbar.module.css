@@ -51,7 +51,7 @@
   height: 2px;
 }
 
-@media (max-width: 660px) {
+@media (max-width: 820px) {
   .navbar {
     padding: 1.1em;
   }
@@ -67,6 +67,7 @@
   
   .menuHamburger {
     display: block;
+    top: 5px;
     right: 20px;
     z-index: 999;
   }
@@ -104,5 +105,11 @@
 
   .navbar ul.active li {
     margin: 1rem 0;
+  }
+}
+
+@media (max-width: 294px) {
+  .navbar_logo h2 {
+    display: none;
   }
 }

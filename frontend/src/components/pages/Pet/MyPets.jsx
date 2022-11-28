@@ -40,6 +40,25 @@ export default function MyPets() {
     });
   }
 
+  async function concludeAdoption(id) {
+
+    await api.patch(`/pets/conclude/${id}`, null, {
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(token)}`
+      }
+    })
+      .then(response => {
+        const listPets = pets.filter(pet => pet._id !== id);
+        setPets(listPets);
+
+        setFlashMessage(response.data.message, "success");
+      })
+      .catch(err => {
+        console.log(err);
+        setFlashMessage(err.response.data.message || err.message, 'error');
+      })
+  }
+
 
   return (
     <section>
@@ -70,9 +89,12 @@ export default function MyPets() {
                     <div className={styles.actions}>
                       { pet.available ? 
                         <>
-                         { pet.adopter ? <button className={styles.conclude_btn}>Concluir adoção</button> : null}
-                         <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
-                         <button className={styles.delete} onClick={() => removePet(pet._id)}>Excluir</button>
+                          { pet.adopter ? 
+                            <button onClick={ () => concludeAdoption(pet._id) } className={styles.conclude_btn}> Concluir adoção </button> 
+                            : null 
+                          }
+                          <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
+                          <button className={styles.delete} onClick={() => removePet(pet._id)}>Excluir</button>
                         </>
                         : <p>Pet já adotado!</p>
                       }
