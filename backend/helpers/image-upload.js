@@ -27,7 +27,6 @@ const imageUpload = multer({
     }
 
     cb(undefined, true);
-
   }
 })
 

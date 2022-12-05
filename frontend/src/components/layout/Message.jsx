@@ -1,6 +1,6 @@
-import styles from './Message.module.css';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import bus from '../../utils/bus';
+import styles from './Message.module.css';
 
 export default function Message() {
   const [visibility, setVisibility] = useState(false);
@@ -21,9 +21,9 @@ export default function Message() {
     
   }, []);
 
-  return visibility && (
+  return visibility ? (
     <div className={`${styles.message} ${styles[type]}`}>
       { message }
     </div>
-  )
+  ) : null;
 }

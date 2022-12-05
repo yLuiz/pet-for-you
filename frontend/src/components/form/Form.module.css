@@ -1,5 +1,6 @@
 .form_container {
   margin: 0 auto;
+  margin-bottom: 80px;
   flex-direction: column;
   align-items: center;
   max-width: 420px;
@@ -12,7 +13,27 @@
 }
 
 .form_container p a {
-  color: #16479D;
+  color: var(--text-bg-color);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-white-color);
+  font-size: .95rem;
+  text-decoration: none;
+  margin-top: 15px;
+  width: 100%;
+  height: 35px;
+  background-color: var(--text-bg-color);
+
+  transition: all .2s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: #1b50ab;
 }
 
 .form_container form {
@@ -35,8 +56,35 @@
   border: none;
   background-color: #25B456;
   color: #FFF;
-  font-size: 0.95rem;
+  font-size: .95rem;
   cursor: pointer;
+}
+
+.form_container form input[type="submit"]:hover { 
+  background-color: #1f9649;
+}
+
+.form_container p {
+  margin-top: 1em;
+}
+
+.form_container p a {
+  color: var(--bg-color);
+  font-weight: bold;
+}
+
+/* form de pets */
+.preview_pet_images {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.preview_pet_images img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-left: 1em;
 }
 
 @media (max-width: 460px) {

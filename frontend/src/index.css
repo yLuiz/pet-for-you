@@ -1,3 +1,11 @@
+:root {
+  --text-white-color: #fff3f3;
+  --text-bg-color: #2164d8;
+  --bg-color-dark-1: #0048c5;
+  --bg-color: #2164d8;
+  --bg-color-opacity-95: rgba(33, 100, 216, 0.95);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,13 +14,16 @@
 }
 
 h1 {
-  color: #16479D;
+  color: var(--text-bg-color);
   margin-bottom: 1em;
   font-size: 2.1em;
 }
 
-.bold {
-  font-weight: bold;
-  color: #16479D;
+input:not([type= "submit"]):focus {
+  outline-color: var(--text-bg-color);
 }
 
+.bold {
+  font-weight: bold;
+  color: var(--text-bg-color);
+}

@@ -81,7 +81,6 @@ module.exports = class UserController {
 
   static async login(req, res) {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
 
     if(!email) {
       return res.status(422).json({ 
@@ -95,16 +94,18 @@ module.exports = class UserController {
       })
     }
 
+    const user = await User.findOne({ email });
+
     if(!user) {
-      return res.status(422).json({
-        message: "Usuário não encontrado!"
+      return res.status(403).json({
+        message: "Credenciais inválidas!"
       })
     }
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
     if(!isCorrectPassword) {
-      return res.status(400).json({ messages: 'Credênciais incorretas!' })
+      return res.status(400).json({ message: 'Credênciais incorretas!' })
     }
 
     try {
@@ -191,17 +192,17 @@ module.exports = class UserController {
 
     userExists.email = email;
 
-    if(!password) {
+    if(password && !confirmpassword) {
       return res.status(422).json({
-        message: 'A senha é obrigatória!'
+        message: 'A confirmação é obrigatória!'
       })
     }
 
-    if(!confirmpassword) {
-      return res.status(422).json({
-        message: 'A confirmação de senha é obrigatória!'
-      })
-    }
+    // if(!confirmpassword) {
+    //   return res.status(422).json({
+    //     message: 'A confirmação de senha é obrigatória!'
+    //   })
+    // }
 
     if(!phone) { 
       return res.status(422).json({
