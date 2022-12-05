@@ -16,7 +16,7 @@ export default function useAuth() {
       const data = await api.post('/users/register', user).then(response => response.data);
       
       await authUser(data);
-    } 
+    }
     catch(err) {
       msgText = err.response.data.message;
       msgType = 'error';

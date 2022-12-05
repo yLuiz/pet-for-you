@@ -4,7 +4,7 @@ const server = express();
 
 
 server.use(express.json());
-server.use(cors({ credentials: true, origin: 'http://localhost:3001' }));
+server.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // Public folder 
 server.use(express.static('public'));

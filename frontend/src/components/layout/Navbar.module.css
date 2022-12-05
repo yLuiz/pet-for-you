@@ -1,9 +1,17 @@
+:root {
+  --text-color: #eef4ff;
+  --bg-color: #0054b5;
+  /* background-color: #FFD400; */
+  /* color: #16479d; */
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em;
-  background-color: #FFD400;
-  color: #16479d;
+  
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .navbar_logo {
@@ -26,7 +34,9 @@
 .navbar li,
 .navbar a {
   text-decoration: none;
-  color: #16479d;
+  /* color: #16479d; */
+  color: var(--text-color);
+
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
@@ -35,12 +45,14 @@
 }
 
 .navbar li:hover {
-  background-color: #16479d;
+  /* background-color: #16479d; */
+  background-color: var(--text-color);
+
   color: #FFF;
 }
 
 .navbar li:hover > a {
-  color: #FFF;
+  color: var(--bg-color);
 }
 
 @media (max-width: 600px) {
