@@ -30,8 +30,6 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
     handleSubmit(pet)
   }
 
-  console.log(pet)
-
   return (
     <div
       className={formStyles.form_container}
