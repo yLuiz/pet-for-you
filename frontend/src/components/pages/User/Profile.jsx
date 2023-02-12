@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import environment from '../../../environment/environment';
 import useFlashMessage from '../../../hooks/useFlashMessage';
 import api from '../../../utils/api';
 import formStyles from '../../form/Form.module.css';
@@ -10,6 +9,7 @@ import styles from './Profile.module.css';
 
 import { Context } from '../../../context/UserContext';
 import { useContext } from 'react';
+import environment from '../../../environment/environment';
 
 export default function Profile() {
 

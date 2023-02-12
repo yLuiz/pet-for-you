@@ -4,7 +4,7 @@ import api from '../../../utils/api'
 import styles from './PetDetails.module.css';
 import useFlashMessage from "../../../hooks/useFlashMessage";
 import { useState } from "react";
-import environment from "../../../environment/environment";
+import { REACT_APP_API } from "../../../environment/environment";
 
 export default function PetDetails() {
 
@@ -49,7 +49,7 @@ export default function PetDetails() {
             {pet.images.map((image, index) => (
               <img
                 key={index}
-                src={`${environment.REACT_APP_API}/images/pets/${image}`}
+                src={`${REACT_APP_API}/images/pets/${image}`}
                 alt={pet.name}
               />
             ))}
