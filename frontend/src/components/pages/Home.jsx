@@ -10,16 +10,14 @@ export default function Home() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    ( async () => {
-      await api.get('/pets')
+      api.get('pets')
       .then(response => {
         setPets(response.data.pets);
       })
       .catch((err) => {
         console.log(err);
-      })
-    })()
-  }, []);
+      }
+    )}, []);
 
   return (
     <section>

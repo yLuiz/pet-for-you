@@ -41,7 +41,7 @@ function App() {
               <Route path='/pet/edit/:id' element={ <EditPet /> }></Route>
               <Route path='/pet/:id' element={ <PetDetails /> }></Route>
               <Route path='/pet/myadoptions' element={ <MyAdoptions /> }></Route>
-              <Route path='*' element={ <Home />}></Route>
+              <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </Container>
           <Footer />
