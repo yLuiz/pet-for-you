@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 server.use(express.json());
-server.use(cors({ credentials: true, origin: '*' }));
+server.use(cors());
 
 // Public folder 
 server.use(express.static('public'));
