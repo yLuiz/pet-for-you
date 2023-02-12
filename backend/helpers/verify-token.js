@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const environment = require('../environment/environment');
+const JWT_SECRET = process.env.JWT_SECRET;
 const getToken = require('./get-token');
 
 const verifyToken = (req, res, next) => { 
@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     // console.log(token);
-    const decoded = jwt.verify(token, environment.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     if (!decoded) {
       return res.status(401).send({ message: 'Unauthorized' });
     }

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const server = express();
+require('dotenv').config();
 
 
 server.use(express.json());
@@ -17,7 +18,7 @@ server.use('/users', UserRoutes);
 server.use('/pets', PetRoutes);
 
 
-server.listen('5001', () => {
+server.listen(process.env.PORT || 5001, () => {
   console.log(`
     ==============================================
     🚀 API IS RUNNING IN http://localhost:5001/ 🚀

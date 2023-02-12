@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const environment = require('../environment/environment');
 
 // Helpers
 const createUserToken = require('../helpers/create-user-token');
@@ -122,7 +121,7 @@ module.exports = class UserController {
     if(req.headers.authorization) {
       try {
         const token = getToken(req);
-        const isValidToken = jwt.verify(token, environment.JWT_SECRET);
+        const isValidToken = jwt.verify(token, process.env.JWT_SECRET);
         const userInformations = isValidToken;
 
         currentUser = await User.findById(userInformations.id);

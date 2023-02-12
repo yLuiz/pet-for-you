@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const environment = require('../environment/environment');
+
+const MONGODB_URL = process.env.MONGODB_URL;
 
 async function main() {
-  await mongoose.connect(environment.MONGODB_URL);
+  await mongoose.connect(MONGODB_URL);
   console.log("Connected to Mongoose!"); 
 }
 
