@@ -20,7 +20,8 @@ h1 {
 }
 
 input:not([type= "submit"]):focus {
-  outline-color: var(--text-bg-color);
+  border-color: var(--text-bg-color);
+  box-shadow: 0 0 3px var(--text-bg-color);
 }
 
 .bold {

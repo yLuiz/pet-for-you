@@ -10,7 +10,7 @@ import styles from '../../form/Form.module.css';
 export default function Login() {
 
   const [user, setUser] = useState({});
-  const { login } = useContext(Context);
+  const { login, loading } = useContext(Context);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -19,6 +19,8 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (loading) return;
     login(user);
   }
 
@@ -36,6 +38,7 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <div className={styles.form_inputs}>
           <Input
+            required={true}
             text='Email'
             name='email'
             type='email'
@@ -43,13 +46,14 @@ export default function Login() {
             handleChange={handleChange}
           />
           <Input
+            required={true}
             text='Senha'
             name='password'
             type='password'
             placeholder='Digite o sua senha'
             handleChange={handleChange}
           />
-          <input type="submit" value="Entrar" />
+          <button type="submit"> { loading ? <span className={styles.loader}></span> : 'Entrar' } </button>
         </div>
       </form>
       <p>

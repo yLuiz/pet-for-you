@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
 
@@ -23,17 +24,25 @@ export default function useAuth() {
 
     try {
 
-      const data = await api.post('/users/login', user).then(response => response.data);
+      setLoading(true);
+
+      const data = await api.post('/users/login', user).then(response => {
+        
+        setLoading(false);
+
+        return response.data;
+      });
 
       await authUser(data);
 
       setFlashMessage(msgText, msgType);
     } catch (err) {
-      msgText = err.response.data.message;
+      msgText = err.response.data?.message || "Credênciais inválidas";
       msgType = "error";
 
       console.log(err);
-
+      
+      setLoading(false);
       setFlashMessage(msgText, msgType);
     }
   }
@@ -54,6 +63,7 @@ export default function useAuth() {
       await authUser(data);
     }
     catch(err) {
+      console.log(err.response)
       msgText = err.response.data.message;
       msgType = 'error';
     }
@@ -73,5 +83,5 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   }
 
-  return { authenticated, register, logout, login };
+  return { authenticated, register, logout, login, loading };
 }

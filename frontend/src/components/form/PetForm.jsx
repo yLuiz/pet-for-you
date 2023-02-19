@@ -5,10 +5,12 @@ import Select from './Select'
 import formStyles from './Form.module.css';
 import { Link } from 'react-router-dom';
 import environment from '../../environment/environment';
+import useFlashMessage from '../../hooks/useFlashMessage';
 
-export default function PertForm({ handleSubmit, petData, btnText }) {
+export default function PertForm({ handleSubmit, petData, btnText, loading }) {
 
   const [pet, setPet] = useState(petData || {});
+  const { setFlashMessage } = useFlashMessage();
   const [preview, setPreview] = useState([]);
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
@@ -27,7 +29,12 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
 
   function submit(event) {
     event.preventDefault();
-    handleSubmit(pet)
+    if (!pet.color) {
+      
+      setFlashMessage("Imagem é obrigatória!", "error");
+      return;
+    }
+    handleSubmit(pet);
   }
 
   return (
@@ -58,7 +65,8 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
             }
           </div>
 
-          <Input 
+          <Input
+            required={true} 
             text="Imagem"
             type="file"
             name="image"
@@ -66,7 +74,8 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
             handleChange={onFileChange}
           />
 
-          <Input 
+          <Input
+            required={true} 
             text="Nome"
             type="text"
             placeholder="Digite o nome"
@@ -75,7 +84,8 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
             value={pet.name || ''}
           />
 
-          <Input 
+          <Input
+            required={true} 
             text="Idade"
             type="number"
             placeholder="Digite a idade"
@@ -84,7 +94,8 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
             value={pet.age || ''}
           />
 
-          <Input 
+          <Input
+            required={true} 
             text="Peso"
             type="number"
             placeholder="Digite o peso"
@@ -94,6 +105,7 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
           />
 
           <Select
+            required={true}
             name="color"
             text="Seleciona a cor"
             value={pet.color || ''}
@@ -101,7 +113,7 @@ export default function PertForm({ handleSubmit, petData, btnText }) {
             handleChange={handleColor}
           />
 
-          <input type="submit" value="Cadastrar Pet" />
+          <button type='submit'>{ loading ? <span className={formStyles.loader}></span> : "Cadastrar pet" }</button>
           <Link className={formStyles.backButton} to="/pet/mypets">Voltar</Link>
         </div>
       </form>

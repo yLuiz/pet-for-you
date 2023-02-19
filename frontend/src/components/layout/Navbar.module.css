@@ -97,6 +97,38 @@
     background-color: #FFF;
   }
 
+  .menuHamburger.active {
+    display: block;
+    top: 15px;
+    right: 20px;
+    z-index: 999;
+    transform: rotate(45deg);
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .menuHamburger.active::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 2px;
+    transform: rotate(90deg);
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .menuHamburger.active::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+
+    transition: all 0.5s ease-in-out;
+  }
+
   .navbar ul.active {
     visibility: visible;
     flex-direction: column;

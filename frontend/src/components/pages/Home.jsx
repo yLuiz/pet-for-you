@@ -8,11 +8,13 @@ import environment from '../../environment/environment';
 export default function Home() {
 
   const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
       api.get('pets')
       .then(response => {
         setPets(response.data.pets);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -27,7 +29,7 @@ export default function Home() {
       </div>
       <div className={styles.pet_container}>
         {
-          pets.length ? 
+          loading ? <div className={styles.loader_row}><span className={styles.loader}></span></div> : pets.length ? 
           pets.map(pet => (
             <div className={styles.pet_card} key={pet._id}>
               

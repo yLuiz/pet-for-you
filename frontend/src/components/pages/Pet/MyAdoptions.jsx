@@ -13,6 +13,7 @@ export default function MyAdoptions() {
   
   const [pets, setPets] = useState([]);
   const [token] = useState(localStorage.getItem('token') || null);
+  const [loading, setLoading] = useState(true);
   const { setFlashMessage } = useFlashMessage();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function MyAdoptions() {
       })
       .then(response => {
         setPets(response.data.pets);
+        setLoading(false);
       })
       .catch(err => {
         setFlashMessage(err.data.message, 'error');
@@ -68,7 +70,7 @@ export default function MyAdoptions() {
           )) : null
         }
         {
-          pets.length === 0 ? <p>Não há pets em adoção ainda.</p> : null
+          loading ? <div className={styles.loader_row}><span className={styles.loader}></span></div> : !pets.length ? <p>Não há pets em adoção ainda.</p> : null
         }
       </div>
     </section>

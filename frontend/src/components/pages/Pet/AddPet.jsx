@@ -9,6 +9,7 @@ export default function AddPet() {
 
   const [token] = useState(localStorage.getItem('token') || null);
   const { setFlashMessage } = useFlashMessage();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   async function registerPet(pet) {
@@ -17,12 +18,21 @@ export default function AddPet() {
       if(key === 'images') {
         for(let i = 0; i < pet[key].length; i++) {
           formData.append('images', pet[key][i]);
-          console.log(pet[key][i])
         }
       } else {
         formData.append(key, pet[key]);
       }
     })
+    
+    setLoading(true);
+
+    if (loading) {
+
+      setFlashMessage("Aguarde o pet ser cadastrado.", "error");
+
+      return;
+    };
+
     await api.post('pets/register', formData, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(token)}`,
@@ -32,10 +42,12 @@ export default function AddPet() {
     ).then(response => {
       setFlashMessage(response.data.message, "success"); 
       navigate('/pet/mypets');
+      setLoading(false);
       return response.data.data;
     })
     .catch(err => {
       setFlashMessage(err.response.data.error, "error");
+      setLoading(false);
       console.log(err);
       return err.response.data;
     })
@@ -50,6 +62,7 @@ export default function AddPet() {
 
       <PetForm
         handleSubmit={registerPet}
+        loading={loading}
       />
     </section>
   )

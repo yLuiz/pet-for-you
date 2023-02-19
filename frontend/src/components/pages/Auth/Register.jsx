@@ -8,7 +8,7 @@ import { Context } from "../../../context/UserContext";
 
 export default function Register() {
   const [user, setUser] = useState();
-  const { register } = useContext(Context);
+  const { register, loading } = useContext(Context);
   
   function handleChange(e) {
     setUser({...user, [e.target.name]: e.target.value})
@@ -25,6 +25,7 @@ export default function Register() {
       <form onSubmit={handleSubmit}>
         <div className={styles.form_inputs}>
           <Input
+            required={true}
             text="Nome"
             type="text"
             name="name"
@@ -33,6 +34,7 @@ export default function Register() {
           />
 
           <Input
+            required={true}
             text="Telefone"
             type="text"
             name="phone"
@@ -41,6 +43,7 @@ export default function Register() {
           />
 
           <Input
+            required={true}
             text="Email"
             type="email"
             name="email"
@@ -49,6 +52,7 @@ export default function Register() {
           />
 
           <Input
+            required={true}
             text="Senha"
             type="password"
             name="password"
@@ -57,6 +61,7 @@ export default function Register() {
           />
 
           <Input
+            required={true}
             text="Confirmação de senha"
             type="password"
             name="confirmpassword"
@@ -64,7 +69,7 @@ export default function Register() {
             handleChange={handleChange}
           />
         </div>
-        <input type="submit" value="Cadastrar" />
+        <button type="submit"> { loading ? <span className={styles.loader}></span> : 'Cadastrar'} </button>
       </form>
       <p>
         Já tem conta? <Link to="/login">Clique aqui</Link>

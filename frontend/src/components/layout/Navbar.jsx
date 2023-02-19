@@ -11,9 +11,15 @@ export default function Navbar() {
 
   const { authenticated, logout } = useContext(Context);
   const [ active, setActive ] = useState(false);
+  const [ activeClass, setActiveClass] = useState("");
 
-  function setShowMenu(e) {
+  function setShowMenu() {
     setActive(!active);
+    if(!active) {
+      setActiveClass('active');
+    } else {
+      setActiveClass('');
+    }
   }
 
   return ( 
@@ -22,7 +28,7 @@ export default function Navbar() {
         <img src={Logo} alt="Get A Pet Logo" />
         <h2>Get A Pet</h2>
       </div>
-      <span onClick={setShowMenu} className={styles.menuHamburger}></span>
+      <span onClick={setShowMenu} className={`${styles.menuHamburger } ${styles[activeClass]}`}></span>
       <ul onClick={setShowMenu} className={ active ? styles.active : null}>
         <li>
           <Link to="">Adotar</Link>

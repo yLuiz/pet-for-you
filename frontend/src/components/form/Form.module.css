@@ -50,7 +50,13 @@
   width: 400px;
 }
 
+.form_container form button[type="submit"],
 .form_container form input[type="submit"] { 
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 400px;
   height: 35px;
   border: none;
@@ -60,7 +66,8 @@
   cursor: pointer;
 }
 
-.form_container form input[type="submit"]:hover { 
+.form_container form button[type="submit"]:hover,
+.form_container form input[type="submit"] { 
   background-color: #1f9649;
 }
 
@@ -87,7 +94,41 @@
   margin-left: 1em;
 }
 
+.loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+  25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+  100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}
+
 @media (max-width: 460px) {
+
+  .form_container {
+    padding: 0 20px;
+  }
+
   .form_container form .form_inputs,
   .form_container form input[type=submit] { 
     width: 100%;

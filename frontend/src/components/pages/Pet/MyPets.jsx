@@ -11,6 +11,7 @@ import  useFlashMessage from '../../../hooks/useFlashMessage';
 export default function MyPets() {
 
   const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [token] = useState(localStorage.getItem('token') || null);
   const navigate = useNavigate();
   const { setFlashMessage } = useFlashMessage();
@@ -25,6 +26,7 @@ export default function MyPets() {
       }
       ).then(response => {
         setPets(response.data.userPets);
+        setLoading(false);
       })
     }())
 
@@ -107,7 +109,7 @@ export default function MyPets() {
           : null
         }
         {
-          !pets.length ? <p>Não há Pets cadastrados</p> : null
+          loading ? <div className={styles.loader_row}><span className={styles.loader}></span></div> : !pets.length ? <p>Não há Pets cadastrados</p> : null
         }
       </div>
     </section>
