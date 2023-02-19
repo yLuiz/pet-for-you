@@ -37,7 +37,7 @@ export default function useAuth() {
 
       setFlashMessage(msgText, msgType);
     } catch (err) {
-      msgText = err.response.data?.message || "Credênciais inválidas";
+      msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
 
       console.log(err);
