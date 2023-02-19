@@ -4,6 +4,10 @@ const getUserByToken = require("../helpers/get-user-by-token");
 const User = require("../models/User");
 const { ObjectId } = require("mongodb");
 
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('node:util');
+
 module.exports = class PetController {
   static async register(req, res) {
     const { name, age, weight, color } = req.body;
@@ -50,7 +54,7 @@ module.exports = class PetController {
     });
 
     images.map((image) => {
-      console.log(image);
+      // console.log(image);
       pet.images.push(image.filename);
     });
 
@@ -120,9 +124,14 @@ module.exports = class PetController {
         .json({ message: "Hoveu um problema na solicitação!" });
     }
 
-    await Pet.findByIdAndRemove(_id);
+    return Pet.findOneAndRemove(_id)
+      .then(() => {
+        pet.images.map(image => {
+          promisify(fs.unlink)(path.resolve(__dirname, '..', 'public', 'images', 'pets', image))
+        })
 
-    return res.status(200).json({ message: "Pet deletado!", pet });
+        return res.status(200).json({ message: "Pet deletado!", pet });
+      });
   }
  
   static async updatePetById(req, res) {
