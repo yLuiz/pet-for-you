@@ -132,12 +132,6 @@
   margin-bottom: 0.5em;
 }
 
-@media(max-width: 440px) {
-  .petslist_header h1 {
-    margin: 0px 32px;
-  }
-}
-
 .loader {
   width: 38px;
   height: 38px;
