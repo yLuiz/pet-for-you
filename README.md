@@ -3,7 +3,9 @@
 # Acesso
 https://adopt-pet-sigma.vercel.a
 <br>
-Not available deploy in this moment
+O backend não está funcionando no momento, apenas o Frontend. 
+<br>
+Não será possível acessar o sistema.
 
 # Tecnologies
 
