@@ -5,7 +5,7 @@ https://adopt-pet-sigma.vercel.a
 <br>
 O backend não está funcionando no momento, apenas o Frontend. 
 <br>
-Não será possível acessar o sistema.
+Por esse motivo, não será possível entrar no sistema.
 
 # Tecnologies
 
