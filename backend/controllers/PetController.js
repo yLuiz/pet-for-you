@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('node:util');
+const { promisify } = require('util');
 
 module.exports = class PetController {
   static async register(req, res) {
