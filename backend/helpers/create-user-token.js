@@ -5,7 +5,7 @@ const createUserToken = async (user, req, res) => {
   const userToken = jwt.sign({ 
     name: user.name, 
     id: user._id
-  }, JWT_SECRET, {expiresIn: '365d'});
+  }, JWT_SECRET, { expiresIn: '1d' });
 
   res.status(200).json({
     message: "Você está autenticado",
