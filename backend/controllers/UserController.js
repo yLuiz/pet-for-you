@@ -197,12 +197,6 @@ module.exports = class UserController {
       })
     }
 
-    // if(!confirmpassword) {
-    //   return res.status(422).json({
-    //     message: 'A confirmação de senha é obrigatória!'
-    //   })
-    // }
-
     if(!phone) { 
       return res.status(422).json({
         message: 'O telefone é obrigatório!'
