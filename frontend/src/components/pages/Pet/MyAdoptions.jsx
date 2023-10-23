@@ -28,6 +28,7 @@ export default function MyAdoptions() {
         setLoading(false);
       })
       .catch(err => {
+        console.error(err);
         setFlashMessage(err.data.message, 'error');
       })
     }

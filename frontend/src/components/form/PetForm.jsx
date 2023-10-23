@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
-import Input from './Input'
-import Select from './Select'
-import formStyles from './Form.module.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import environment from '../../environment/environment';
 import useFlashMessage from '../../hooks/useFlashMessage';
+import formStyles from './Form.module.css';
+import Input from './Input';
+import Select from './Select';
 
 export default function PertForm({ handleSubmit, petData, btnText, loading }) {
 
@@ -113,7 +112,7 @@ export default function PertForm({ handleSubmit, petData, btnText, loading }) {
             handleChange={handleColor}
           />
 
-          <button type='submit'>{ loading ? <span className={formStyles.loader}></span> : "Cadastrar pet" }</button>
+          <button disabled={ loading } type='submit'>{ loading ? <span className={formStyles.loader}></span> : "Cadastrar pet" }</button>
           <Link className={formStyles.backButton} to="/pet/mypets">Voltar</Link>
         </div>
       </form>

@@ -44,7 +44,6 @@ function App() {
               <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </Container>
-          <Footer />
         </UserProvider>
       </Router>
     </div>

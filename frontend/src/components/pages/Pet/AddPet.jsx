@@ -39,17 +39,19 @@ export default function AddPet() {
         'Content-Type': 'multipart/form-data'
       }
     }
-    ).then(response => {
+    )
+    .then(response => {
       setFlashMessage(response.data.message, "success"); 
       navigate('/pet/mypets');
-      setLoading(false);
       return response.data.data;
     })
     .catch(err => {
       setFlashMessage(err.response.data.error, "error");
-      setLoading(false);
-      console.log(err);
+      console.error(err);
       return err.response.data;
+    })
+    .finally(() => {
+      setLoading(false);
     })
   }
 

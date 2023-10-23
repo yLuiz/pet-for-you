@@ -28,3 +28,7 @@ input:not([type= "submit"]):focus {
   font-weight: bold;
   color: var(--text-bg-color);
 }
+
+button:disabled {
+  background-color: #cecece !important;
+}

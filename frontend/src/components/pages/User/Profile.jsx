@@ -62,6 +62,9 @@ export default function Profile() {
       return response.data;
     })
     .catch(err => {
+
+      console.error(err);
+
       msgType = 'error';
       return err.response.data;
     })

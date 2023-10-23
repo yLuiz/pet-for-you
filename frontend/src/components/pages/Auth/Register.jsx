@@ -21,7 +21,7 @@ export default function Register() {
 
   return (
     <section className={styles.form_container}>
-      <h1>Register</h1>
+      <h1>Castrado</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.form_inputs}>
           <Input
