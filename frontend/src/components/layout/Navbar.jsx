@@ -25,8 +25,8 @@ export default function Navbar() {
   return ( 
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
-        <img src={Logo} alt="Get A Pet Logo" />
-        <h2>Get A Pet</h2>
+        <img src={Logo} alt="Pet For You Logo" />
+        <h2>Pet For You</h2>
       </div>
       <span onClick={setShowMenu} className={`${styles.menuHamburger } ${styles[activeClass]}`}></span>
       <ul onClick={setShowMenu} className={ active ? styles.active : null}>

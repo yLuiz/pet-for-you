@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <p>
-        <span className="bold">Get A Pet</span> &copy; 2021
+        <span className="bold">Pet For You</span> &copy; 2021
       </p>
     </footer>
   )
