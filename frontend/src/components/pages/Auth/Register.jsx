@@ -69,7 +69,11 @@ export default function Register() {
             handleChange={handleChange}
           />
         </div>
-        <button type="submit"> { loading ? <span className={styles.loader}></span> : 'Cadastrar'} </button>
+        <button 
+          disabled={loading} 
+          type="submit"
+
+        > { loading ? <span className={styles.loader}></span> : 'Cadastrar'} </button>
       </form>
       <p>
         Já tem conta? <Link to="/login">Clique aqui</Link>

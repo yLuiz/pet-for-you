@@ -32,3 +32,8 @@ input:not([type= "submit"]):focus {
 button:disabled {
   background-color: #cecece !important;
 }
+
+button[type="submit"] {
+  min-width: none !important;
+  width: 100% !important;
+}

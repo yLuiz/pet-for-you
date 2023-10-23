@@ -53,7 +53,7 @@ export default function Login() {
             placeholder='Digite o sua senha'
             handleChange={handleChange}
           />
-          <button type="submit"> { loading ? <span className={styles.loader}></span> : 'Entrar' } </button>
+          <button disabled={loading} type="submit"> { loading ? <span className={styles.loader}></span> : 'Entrar' } </button>
         </div>
       </form>
       <p>

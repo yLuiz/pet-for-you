@@ -13,6 +13,7 @@ export default function EditPet() {
   const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(pet) {
     console.log(pet)
@@ -26,7 +27,9 @@ export default function EditPet() {
       } else {
         formData.append(key, pet[key]);
       }
-    })
+    });
+
+    setLoading(true);
     await api.patch('pets/' + id, formData).then(response => {
       setFlashMessage(response.data.message, "success"); 
       navigate('/pet/mypets');
@@ -36,6 +39,9 @@ export default function EditPet() {
       setFlashMessage(err.response.data.error, "error");
       console.log(err);
       return err.response.data;
+    })
+    .finally(() => {
+      setLoading(false);
     })
   }
 
@@ -58,6 +64,7 @@ export default function EditPet() {
             </h1>
             <PetForm
               petData={pet}
+              loading={loading}
               handleSubmit={handleSubmit}
             />
           </div>

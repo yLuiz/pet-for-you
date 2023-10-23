@@ -14,6 +14,7 @@ import environment from '../../../environment/environment';
 export default function Profile() {
 
   const { authenticated } = useContext(Context);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
   const [preview, setPreview] = useState();
   const [token] = useState(localStorage.getItem('token' || ''));
@@ -52,6 +53,8 @@ export default function Profile() {
     const formData = new FormData();
     Object.keys(user).forEach(key => formData.append(key, user[key]));
 
+    setLoading(true);
+
     const data = await api.patch(`/users/edit/${user._id}`, formData, {
       headers: {
         'Authorization': `Bearer ${JSON.parse(token)}`,
@@ -67,6 +70,9 @@ export default function Profile() {
 
       msgType = 'error';
       return err.response.data;
+    })
+    .finally(() => {
+      setLoading(false);
     })
 
     setFlashMessage(data.message, msgType);
@@ -137,8 +143,9 @@ export default function Profile() {
             placeholder="Confirme sua senha"
             handleChange={handleChange}
           />
-
-          <input type="submit" value="Editar" />
+          <button disabled={loading} type="submit">
+            { loading ? <span className={formStyles.loader}></span> : 'Editar' }
+          </button>
         </div>
       </form>
     </section>
