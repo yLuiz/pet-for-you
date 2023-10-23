@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 
-const imageRegex = /\.(jpg|png|webp)$/
+const imageRegex = /\.(jpg|png|webp|jfif)$/
 
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -23,7 +23,8 @@ const imageUpload = multer({
   storage: imageStorage,
   fileFilter(req, file, cb) {
     if(!file.originalname.match(imageRegex)) {
-      return cb(new ('Por favor, envie apenas arquivos de png ou jpg!'));
+
+      return cb('Por favor, envie apenas arquivos de png ou jpg!');
     }
 
     cb(undefined, true);
