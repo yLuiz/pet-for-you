@@ -1,0 +1,37 @@
+{
+  "background_color": "#ffffff",
+  "description": "Registre pets para adoção ou faça você mesmo a sua adoção :)",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Pet For You",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Pet For You",
+  "start_url": "/",
+  "theme_color": "#0054b5",
+  "categories": [
+    "social",
+    "utilities"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/favicon.ico"
+    },
+    {
+      "src": "/logo192.png"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "PetForYou",
+      "url": "petforyou",
+      "description": "Aplicativo para adoção de pets"
+    }
+  ],
+  "id": "pet-for-you"
+}
