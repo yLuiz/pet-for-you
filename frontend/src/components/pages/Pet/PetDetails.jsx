@@ -23,7 +23,7 @@ export default function PetDetails() {
       setFlashMessage(response.data.message, 'success')
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       setFlashMessage(err.response.data.message, 'error');
     });
   }

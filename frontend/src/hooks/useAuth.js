@@ -40,7 +40,7 @@ export default function useAuth() {
       msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
 
-      console.log(err);
+      console.error(err);
       
       setLoading(false);
       setFlashMessage(msgText, msgType);
@@ -63,7 +63,7 @@ export default function useAuth() {
       await authUser(data);
     }
     catch(err) {
-      console.log(err.response)
+      console.error(err.response)
       msgText = err.response.data.message;
       msgType = 'error';
     }
