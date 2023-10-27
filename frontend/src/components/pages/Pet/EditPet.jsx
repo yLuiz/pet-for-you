@@ -16,13 +16,11 @@ export default function EditPet() {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(pet) {
-    console.log(pet)
     const formData =  new FormData(); 
     Object.keys(pet).forEach(key => {
       if(key === 'images') {
         for(let i = 0; i < pet[key].length; i++) {
           formData.append('images', pet[key][i]);
-          console.log(pet[key][i])
         }
       } else {
         formData.append(key, pet[key]);
@@ -37,7 +35,7 @@ export default function EditPet() {
     })
     .catch(err => {
       setFlashMessage(err.response.data.error, "error");
-      console.log(err);
+      console.error(err);
       return err.response.data;
     })
     .finally(() => {

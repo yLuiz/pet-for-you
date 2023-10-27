@@ -10,7 +10,7 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.log(error);
+  console.error(error);
 });
 
 module.exports = mongoose;
