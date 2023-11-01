@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Container from './components/layout/Container';
-import Footer from './components/layout/Footer';
 import Message from './components/layout/Message';
 import Navbar from './components/layout/Navbar';
 import Login from './components/pages/Auth/Login';
@@ -15,12 +14,12 @@ import Profile from './components/pages/User/Profile';
    - Switch to Routes
 */
 
-import MyPets from './components/pages/Pet/MyPets';
-import { UserProvider } from './context/UserContext';
 import AddPet from './components/pages/Pet/AddPet';
 import EditPet from './components/pages/Pet/EditPet';
-import PetDetails from './components/pages/Pet/PetDetails';
 import MyAdoptions from './components/pages/Pet/MyAdoptions';
+import MyPets from './components/pages/Pet/MyPets';
+import PetDetails from './components/pages/Pet/PetDetails';
+import { UserProvider } from './context/UserContext';
 
 function App() {
   return (
