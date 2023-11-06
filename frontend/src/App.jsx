@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Container from './components/layout/Container';
-import Footer from './components/layout/Footer';
 import Message from './components/layout/Message';
 import Navbar from './components/layout/Navbar';
 import Login from './components/pages/Auth/Login';
@@ -15,14 +14,15 @@ import Profile from './components/pages/User/Profile';
    - Switch to Routes
 */
 
-import MyPets from './components/pages/Pet/MyPets';
-import { UserProvider } from './context/UserContext';
 import AddPet from './components/pages/Pet/AddPet';
 import EditPet from './components/pages/Pet/EditPet';
-import PetDetails from './components/pages/Pet/PetDetails';
 import MyAdoptions from './components/pages/Pet/MyAdoptions';
+import MyPets from './components/pages/Pet/MyPets';
+import PetDetails from './components/pages/Pet/PetDetails';
+import { UserProvider } from './context/UserContext';
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -31,16 +31,16 @@ function App() {
           <Message />
           <Container>
             <Routes>
-              <Route path='user/profile' element={ <Profile />}></Route>
-              <Route path='/' element={ <Home />}></Route>
-              <Route path='/login' element={ <Login />}></Route>
-              <Route path='/register' element={ <Register />}></Route>
-              <Route path='/allUsers' element={ <Navigate to="/users" />}></Route>
-              <Route path='/pet/mypets' element={ <MyPets /> }></Route>
-              <Route path='/pet/add' element={ <AddPet /> }></Route>
-              <Route path='/pet/edit/:id' element={ <EditPet /> }></Route>
-              <Route path='/pet/:id' element={ <PetDetails /> }></Route>
-              <Route path='/pet/myadoptions' element={ <MyAdoptions /> }></Route>
+              <Route path='user/profile' element={ <Profile />} />
+              <Route path='/' element={ <Home />} />
+              <Route path='/register' element={ <Register />} />
+              <Route path='/allUsers' element={ <Navigate to="/users" />} />
+              <Route path='/pet/mypets' element={ <MyPets /> } />
+              <Route path='/pet/add' element={ <AddPet /> } />
+              <Route path='/pet/edit/:id' element={ <EditPet /> } />
+              <Route path='/pet/:id' element={ <PetDetails /> } />
+              <Route path='/pet/myadoptions' element={ <MyAdoptions /> } />
+              <Route path='/login' element={ <Login />} />
               <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </Container>

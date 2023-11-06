@@ -16,7 +16,8 @@
   border: 1px solid #b6b6b6;
   border-radius: 5px;
   outline: none;
-
+  width: 100%;
+  height: 40px;
   transition: all 0.1s ease-in-out;
 }
 

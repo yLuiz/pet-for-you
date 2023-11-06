@@ -1,5 +1,6 @@
 import api from '../utils/api';
 import useFlashMessage from './useFlashMessage';
+import { jwtDecode } from 'jwt-decode';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -74,7 +75,6 @@ export default function useAuth() {
   function logout() {
     const msgText = "Logout realizado com sucesso";
     const msgType = 'success';
-
     setAuthenticated(false);
     localStorage.removeItem('token');
     api.defaults.Authorization = undefined;
@@ -83,5 +83,26 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   }
 
-  return { authenticated, register, logout, login, loading };
+  function isValidToken(token) {
+    if (!token) return false;
+
+    try {
+
+      const tokenParsed = JSON.parse(token);
+
+      const tokenDecoded = jwtDecode(tokenParsed);
+      if (Date.now() >= tokenDecoded.exp * 1000) {
+        return false;
+      }
+
+      return true;
+    }
+    catch (error) {
+      console.error(error);
+      return false;
+    }
+
+  }
+
+  return { authenticated, register, logout, login, loading, isValidToken };
 }
