@@ -22,6 +22,7 @@ import PetDetails from './components/pages/Pet/PetDetails';
 import { UserProvider } from './context/UserContext';
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -30,16 +31,16 @@ function App() {
           <Message />
           <Container>
             <Routes>
-              <Route path='user/profile' element={ <Profile />}></Route>
-              <Route path='/' element={ <Home />}></Route>
-              <Route path='/login' element={ <Login />}></Route>
-              <Route path='/register' element={ <Register />}></Route>
-              <Route path='/allUsers' element={ <Navigate to="/users" />}></Route>
-              <Route path='/pet/mypets' element={ <MyPets /> }></Route>
-              <Route path='/pet/add' element={ <AddPet /> }></Route>
-              <Route path='/pet/edit/:id' element={ <EditPet /> }></Route>
-              <Route path='/pet/:id' element={ <PetDetails /> }></Route>
-              <Route path='/pet/myadoptions' element={ <MyAdoptions /> }></Route>
+              <Route path='user/profile' element={ <Profile />} />
+              <Route path='/' element={ <Home />} />
+              <Route path='/register' element={ <Register />} />
+              <Route path='/allUsers' element={ <Navigate to="/users" />} />
+              <Route path='/pet/mypets' element={ <MyPets /> } />
+              <Route path='/pet/add' element={ <AddPet /> } />
+              <Route path='/pet/edit/:id' element={ <EditPet /> } />
+              <Route path='/pet/:id' element={ <PetDetails /> } />
+              <Route path='/pet/myadoptions' element={ <MyAdoptions /> } />
+              <Route path='/login' element={ <Login />} />
               <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </Container>

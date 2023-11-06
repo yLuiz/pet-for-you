@@ -34,7 +34,7 @@ export default function Profile() {
         setUser(response.data.data);
       })
     }
-  }, [token])
+  }, [authenticated, navigate, token])
 
   function handleChange(e) {
     setUser({...user, [e.target.name]: e.target.value});
