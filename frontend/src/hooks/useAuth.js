@@ -104,5 +104,5 @@ export default function useAuth() {
 
   }
 
-  return { authenticated, register, logout, login, loading, isValidToken };
+  return { authenticated, register, logout, login, loading, isValidToken, setAuthenticated };
 }

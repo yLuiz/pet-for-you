@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 export default function Container({ children }) {
 
   const location = useNavigate();
-  const { isValidToken, logout } = useContext(Context);
+  const { isValidToken, logout, authenticated } = useContext(Context);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
 
-    if (!isValidToken(token)) {
+    if (authenticated && !isValidToken(token)) {
       logout();
     }
     
