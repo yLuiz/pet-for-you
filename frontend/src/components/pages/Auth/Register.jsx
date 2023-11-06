@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../form/Form.module.css';
 import Input from "../../form/Input";
@@ -8,7 +8,14 @@ import { Context } from "../../../context/UserContext";
 
 export default function Register() {
   const [user, setUser] = useState();
-  const { register, loading } = useContext(Context);
+  const { register, loading, authenticated, setAuthenticated } = useContext(Context);
+
+  useEffect(() => {
+    if (authenticated) {
+      localStorage.removeItem('token');
+      setAuthenticated(false);
+    }
+  }, [authenticated, setAuthenticated]);
 
   function handleChange(e) {
     setUser({...user, [e.target.name]: e.target.value})

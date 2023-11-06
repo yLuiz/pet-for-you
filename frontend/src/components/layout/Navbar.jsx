@@ -30,13 +30,14 @@ export default function Navbar() {
       </div>
       <span onClick={setShowMenu} className={`${styles.menuHamburger } ${styles[activeClass]}`}></span>
       <ul onClick={setShowMenu} className={ active ? styles.active : null}>
-        <li>
-          <Link to="">Adotar</Link>
-        </li>
+        
 
         { authenticated ?
           (
             <>
+              <li>
+                <Link to="">Adotar</Link>
+              </li>
               <li>
                 <Link to="/pet/myadoptions">Minhas adoções</Link>
               </li>
