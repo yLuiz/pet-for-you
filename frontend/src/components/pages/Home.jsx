@@ -4,6 +4,7 @@ import api from '../../utils/api';
 import styles from './Home.module.css';
 import { Link } from 'react-router-dom';
 import environment from '../../environment/environment';
+import PetNotFound from './Pet/PetNotFound';
 
 export default function Home() {
 
@@ -54,7 +55,8 @@ export default function Home() {
               }
             </div>
           )) 
-          : <p>Não há pets cadastrados ou disponíveis para adoção no momento!</p>
+          : 
+            <PetNotFound paragraph='Não há pets cadastrados ou disponíveis para adoção no momento!' />
         }
       </div>
     </section>
