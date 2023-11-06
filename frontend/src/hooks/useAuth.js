@@ -1,14 +1,13 @@
 import api from '../utils/api';
-import useFlashMessage from './useFlashMessage';
 import { jwtDecode } from 'jwt-decode';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +34,6 @@ export default function useAuth() {
       });
 
       await authUser(data);
-
-      setFlashMessage(msgText, msgType);
     } catch (err) {
       msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
@@ -44,7 +41,14 @@ export default function useAuth() {
       console.error(err);
       
       setLoading(false);
-      setFlashMessage(msgText, msgType);
+      
+    }
+    finally {
+      toast(msgText, {
+        type: msgType,
+        autoClose: 1000,
+        closeOnClick: true,
+      });
     }
   }
   
@@ -69,7 +73,9 @@ export default function useAuth() {
       msgType = 'error';
     }
 
-    setFlashMessage(msgText, msgType);
+    toast(msgText, {
+      type: msgType
+    });
   }
 
   function logout() {
@@ -80,7 +86,13 @@ export default function useAuth() {
     api.defaults.Authorization = undefined;
     navigate('/login');
 
-    setFlashMessage(msgText, msgType);
+    
+    toast(msgText, {
+      type: msgType,
+      autoClose: 1000,
+      closeOnClick: true,
+    });
+    
   }
 
   function isValidToken(token) {

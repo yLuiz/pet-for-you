@@ -6,15 +6,15 @@ import styles from './Dashboard.module.css';
 import RoundedImage from '../../layout/RoundedImage';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import useFlashMessage from '../../../hooks/useFlashMessage';
 import environment from '../../../environment/environment';
+import { toast } from 'react-toastify';
 
 export default function MyAdoptions() {
   
   const [pets, setPets] = useState([]);
   const [token] = useState(localStorage.getItem('token') || null);
   const [loading, setLoading] = useState(true);
-  const { setFlashMessage } = useFlashMessage();
+
 
   useEffect(() => {
     if(token) {
@@ -29,7 +29,9 @@ export default function MyAdoptions() {
       })
       .catch(err => {
         console.error(err);
-        setFlashMessage(err.data.message, 'error');
+        toast(err.data.message, {
+          type: 'error'
+        });
       })
     }
   }, []);
