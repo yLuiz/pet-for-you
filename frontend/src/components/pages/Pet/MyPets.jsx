@@ -5,6 +5,7 @@ import api from '../../../utils/api';
 import environment from '../../../environment/environment';
 import RoundedImage from '../../layout/RoundedImage';
 import styles from './Dashboard.module.css';
+import formStyles from '../../form/Form.module.css';
 import { toast } from 'react-toastify';
  
 export default function MyPets() {
@@ -12,6 +13,7 @@ export default function MyPets() {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token] = useState(localStorage.getItem('token') || null);
+  const [petIdRemoving, setPetIdRemoving] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,16 +33,22 @@ export default function MyPets() {
     if(!token) navigate('/login');
   }, [token])
 
-  async function removePet(_id) {
-    await api.delete('/pets/' + _id).then(response => {
-      const listPets = pets.filter(pet => pet._id !== _id);
-      setPets(listPets);
+  async function removePet(pet) {
+
+    setPetIdRemoving(pet._id);
+
+    const response = await api.delete('/pets/' + pet._id);
 
 
-      toast(response.data.message, {
-        type: 'success',
-      });
+    toast(response.data.message, {
+      type: 'success',
     });
+
+    setLoading(true);
+    const petResponse = await api.get('/pets/mypets')
+    setPets(petResponse.data.userPets);
+    setLoading(false);
+    setPetIdRemoving('');
   }
 
   async function concludeAdoption(id) {
@@ -102,7 +110,17 @@ export default function MyPets() {
                             : null 
                           }
                           <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
-                          <button className={styles.delete} onClick={() => removePet(pet._id)}>Excluir</button>
+                          <button
+                            className={styles.delete} 
+                            onClick={() => removePet(pet)}
+                            disabled={petIdRemoving === pet._id}
+                          >
+                            { 
+                              petIdRemoving === pet._id ? 
+                              'Removendo...'
+                              : 'Excluir' 
+                            }
+                          </button>
                         </>
                         : <p>Pet já adotado!</p>
                       }

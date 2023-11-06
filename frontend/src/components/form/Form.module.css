@@ -101,6 +101,7 @@
   position: relative;
   animation: rotate 1s linear infinite
 }
+
 .loader::before {
   content: "";
   box-sizing: border-box;
