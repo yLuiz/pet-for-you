@@ -5,8 +5,7 @@ import api from '../../../utils/api';
 import environment from '../../../environment/environment';
 import RoundedImage from '../../layout/RoundedImage';
 import styles from './Dashboard.module.css';
-
-import  useFlashMessage from '../../../hooks/useFlashMessage';
+import { toast } from 'react-toastify';
  
 export default function MyPets() {
 
@@ -14,7 +13,6 @@ export default function MyPets() {
   const [loading, setLoading] = useState(true);
   const [token] = useState(localStorage.getItem('token') || null);
   const navigate = useNavigate();
-  const { setFlashMessage } = useFlashMessage();
 
   useEffect(() => {
 
@@ -38,7 +36,10 @@ export default function MyPets() {
       const listPets = pets.filter(pet => pet._id !== _id);
       setPets(listPets);
 
-      setFlashMessage(response.data.message, "success");
+
+      toast(response.data.message, {
+        type: 'success',
+      });
     });
   }
 
@@ -53,11 +54,16 @@ export default function MyPets() {
         const listPets = pets.filter(pet => pet._id !== id);
         setPets(listPets);
 
-        setFlashMessage(response.data.message, "success");
+        toast(response.data.message, {
+          type: 'success'
+        });
       })
       .catch(err => {
         console.error(err);
-        setFlashMessage(err.response.data.message || err.message, 'error');
+
+        toast(err.response.data.message || err.message, {
+          type: 'error'
+        });
       })
   }
 
