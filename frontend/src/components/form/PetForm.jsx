@@ -7,7 +7,7 @@ import Select from "./Select";
 import { toast } from "react-toastify";
 import RoundedImage from "../layout/RoundedImage";
 
-export default function PertForm({ handleSubmit, petData, btnText, loading }) {
+export default function PertForm({ createPet = false, handleSubmit, petData, btnText, loading }) {
   const [pet, setPet] = useState(petData || {});
 
   const [preview, setPreview] = useState([]);
@@ -44,7 +44,7 @@ export default function PertForm({ handleSubmit, petData, btnText, loading }) {
           <div className={formStyles.preview_pet_images}>
             {preview.length ? (
               preview.map((image, index) => (
-                <img
+                <RoundedImage
                   src={URL.createObjectURL(image)}
                   alt={pet.name}
                   key={`${pet.name}${index}`}
@@ -52,7 +52,7 @@ export default function PertForm({ handleSubmit, petData, btnText, loading }) {
               ))
             ) : pet.images ? (
               pet.images.map((image, index) => (
-                <img
+                <RoundedImage
                   src={`${environment.REACT_APP_API}/images/pets/${image}`}
                   alt={pet.name}
                   key={`${pet.name}${index}`}
@@ -116,7 +116,7 @@ export default function PertForm({ handleSubmit, petData, btnText, loading }) {
             {loading ? (
               <span className={formStyles.loader}></span>
             ) : (
-              pet ? "Editar pet" : "Cadastrar pet"
+              createPet ? "Cadastrar pet" : "Editar pet"
             )}
           </button>
           <Link className={formStyles.backButton} to="/pet/mypets">

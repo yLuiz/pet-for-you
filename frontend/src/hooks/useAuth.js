@@ -60,6 +60,8 @@ export default function useAuth() {
   }
 
   async function register(user) {
+
+    setLoading(true);
     let msgText = 'Cadastro realizado com sucesso!';
     let msgType = 'success';
 
@@ -71,6 +73,10 @@ export default function useAuth() {
       console.error(err.response)
       msgText = err.response.data.message;
       msgType = 'error';
+    }
+
+    finally {
+      setLoading(false);
     }
 
     toast(msgText, {

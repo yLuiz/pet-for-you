@@ -67,6 +67,7 @@ export default function AddPet() {
       </div>
 
       <PetForm
+        createPet={true}
         handleSubmit={registerPet}
         loading={loading}
       />

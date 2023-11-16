@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Input from '../../form/Input';
 import bgPets from '../../../assets/img/bg-pets.avif';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +15,20 @@ export default function Login() {
   const [user, setUser] = useState({});
   const { login, loading } = useContext(Context);
   const navigate = useNavigate();
+  const [isShowingPassword, setIsShowingPassword] = useState({
+    password: false,
+    confirmpassword: false,
+  });
+
+  function handleViewPassword(field) {
+
+    console.log(field);
+
+    setIsShowingPassword({
+      ...isShowingPassword,
+      [field]: !isShowingPassword[field]
+    });
+  }
 
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -37,11 +52,11 @@ export default function Login() {
     <section className={styles.login_section}>
       <div className={styles.aplication_name}>
         <h1>PET FOR YOU</h1>
-        <img src={bgPets} alt="Fundo de Pets" srcset="" />
+        <img src={bgPets} alt="Fundo de Pets"/>
       </div>
       <div className={`${styles.form_container}`}>
         <div className={`${styles.form_content}`}>
-          <h2>Login</h2>
+          <h2>LOGIN</h2>
 
           <form onSubmit={handleSubmit}>
             <div className={styles.form_inputs}>
@@ -53,14 +68,22 @@ export default function Login() {
                 placeholder='Digite o seu email'
                 handleChange={handleChange}
               />
-              <Input
-                required={true}
-                text='Senha'
-                name='password'
-                type='password'
-                placeholder='Digite o sua senha'
-                handleChange={handleChange}
-              />
+              <div className={styles.password_input}>
+                <Input
+                  required={true}
+                  text="Senha"
+                  type={isShowingPassword['password'] ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Digite sua senha"
+                  handleChange={handleChange}
+                />
+                <button type='button' onClick={() => handleViewPassword('password')}>
+                  {isShowingPassword['password'] ?
+                    <FaEyeSlash />
+                    : <FaEye />
+                  }
+                </button>
+              </div>
               <button disabled={loading} type="submit"> {loading ? <span className={formStyles.loader}></span> : 'Entrar'} </button>
             </div>
           </form>

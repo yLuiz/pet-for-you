@@ -87,19 +87,10 @@ export default function Profile() {
           
           (
             <RoundedImage
-              src={preview ? URL.createObjectURL(preview) : 
-              `${environment.REACT_APP_API}/images/users/${user.image}`} 
+              src={preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`} 
               alt={`Foto ${user.name}`} 
             />
           )
-          // (user.image || preview) ? 
-          // (
-          //   <RoundedImage
-          //     src={preview ? URL.createObjectURL(preview) : 
-          //     `${environment.REACT_APP_API}/images/users/${user.image}`} 
-          //     alt={`Foto ${user.name}`} 
-          //   />
-          // ) : null
         }
       </div>
       <form onSubmit={handleSubmit}>

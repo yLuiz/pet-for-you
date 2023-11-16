@@ -1,8 +1,9 @@
 import React from 'react';
+import { GrGallery } from 'react-icons/gr';
 import styles from './RoundedImage.module.css';
-import { GrGallery } from 'react-icons/gr'
 
 export default function RoundedImage({ src, alt, width }) {
+
   return (
     src ? 
       <img 

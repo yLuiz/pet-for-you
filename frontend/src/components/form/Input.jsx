@@ -30,7 +30,7 @@ export default function Input({ type = 'text', fileType = '', disabled = false, 
     :
 
     <div className={styles.form_control}>
-      <input 
+      <input
         type={type} 
         name={name} 
         id={name}

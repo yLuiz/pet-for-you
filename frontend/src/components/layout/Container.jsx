@@ -19,9 +19,11 @@ export default function Container({ children }) {
   }, [location]);
 
   return (
-    <main className={styles.container}>
-      <Navbar />
-      { children }
-    </main>
+      <>
+        <Navbar />
+        <main className={styles.container}>
+          { children }
+        </main>
+      </>
   )
 }
