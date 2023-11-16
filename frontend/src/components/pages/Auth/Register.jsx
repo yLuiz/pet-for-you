@@ -9,6 +9,7 @@ import bgPets from '../../../assets/img/bg-pets.avif';
 
 import { Context } from "../../../context/UserContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const [user, setUser] = useState();
@@ -25,13 +26,41 @@ export default function Register() {
     }
   }, [authenticated, setAuthenticated]);
 
+  function handleFocusOutName(event) {
+    event.target.value = event.target.value.trim();
+
+    if(((/[^a-zA-Z\s]+/).test(event.target.value)) && event.target.value.length) {
+      event.target.value = ''
+      toast(`Insira apenas letras`, {
+        type: "error",
+      });
+    }
+  }
+
+  function handleFocusOutEmail(event) {
+    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    event.target.value = event.target.value.trim();
+
+    if(!(regex.test(event.target.value)) && event.target.value !== '') {
+      event.target.value = ''
+      toast(`Insira um e-mail válido`, {
+        type: "error",
+      });
+    }
+
+  }
+
   function handleChange(e) {
-    setUser({ ...user, [e.target.name]: e.target.value })
+    const value = e.target.value.replace(' ', '');
+
+    setUser({ ...user, [e.target.name]: value })
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    register(user)
+    return;
+    register(user);
   }
 
   function handleViewPassword(field) {
@@ -60,6 +89,7 @@ export default function Register() {
                 name="name"
                 placeholder="Digite seu nome"
                 handleChange={handleChange}
+                handleFocusOut={handleFocusOutName}
               />
 
               <Input
@@ -79,6 +109,7 @@ export default function Register() {
                 name="email"
                 placeholder="Digite seu email"
                 handleChange={handleChange}
+                handleFocusOut={handleFocusOutEmail}
               />
 
               <div className={styles.password_input}>

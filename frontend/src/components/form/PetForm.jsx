@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import environment from "../../environment/environment";
+import RoundedImage from "../layout/RoundedImage";
 import formStyles from "./Form.module.css";
 import Input from "./Input";
 import Select from "./Select";
-import { toast } from "react-toastify";
-import RoundedImage from "../layout/RoundedImage";
 
 export default function PertForm({ createPet = false, handleSubmit, petData, btnText, loading }) {
   const [pet, setPet] = useState(petData || {});
@@ -14,12 +14,12 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
   function onFileChange(e) {
-    console.log(e.target.files);
     setPet({ ...pet, images: [...e.target.files] });
     setPreview([...e.target.files]);
   }
 
   function handleChange(e) {
+
     setPet({ ...pet, [e.target.name]: e.target.value });
   }
 
@@ -27,9 +27,20 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
     setPet({ ...pet, color: e.target.options[e.target.selectedIndex].text });
   }
 
+  function handleFocusOutName(event) {
+    event.target.value = event.target.value.trim();
+
+    if(((/[^a-zA-Z\s]+/).test(event.target.value)) && event.target.value) {
+      event.target.value = ''
+      toast(`Insira apenas letras`, {
+        type: "error",
+      });
+    }
+  }
+
   function submit(event) {
     event.preventDefault();
-    if (!pet.images.length) {
+    if (!pet.images?.length) {
       toast("Imagem é obrigatória!", {
         type: "error",
       });
@@ -82,6 +93,7 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
           />
 
           <Input
+            handleFocusOut={handleFocusOutName}
             required={true}
             text="Nome"
             type="text"
@@ -103,7 +115,7 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
 
           <Input
             required={true}
-            text="Peso"
+            text="Peso (kg)"
             type="number"
             placeholder="Digite o peso"
             name="weight"
