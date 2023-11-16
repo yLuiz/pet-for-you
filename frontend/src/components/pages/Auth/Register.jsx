@@ -78,7 +78,7 @@ export default function Register() {
       </div>
       <div className={`${styles.form_container}`}>
         <div className={`${styles.form_content}`}>
-          <h2>Cadastrado</h2>
+          <h2>Cadastro</h2>
           <form onSubmit={handleSubmit}>
             <div className={styles.form_inputs}>
               <Input
