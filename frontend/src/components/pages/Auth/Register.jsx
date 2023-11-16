@@ -65,6 +65,7 @@ export default function Register() {
               <Input
                 required={true}
                 text="Telefone"
+                mask={'(99) 9 9999-9999'}
                 type="text"
                 name="phone"
                 placeholder="Digite seu telefone"

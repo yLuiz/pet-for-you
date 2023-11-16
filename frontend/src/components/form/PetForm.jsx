@@ -14,6 +14,7 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
   function onFileChange(e) {
+    console.log(e.target.files);
     setPet({ ...pet, images: [...e.target.files] });
     setPreview([...e.target.files]);
   }
@@ -28,12 +29,20 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
 
   function submit(event) {
     event.preventDefault();
-    if (!pet.color) {
+    if (!pet.images.length) {
       toast("Imagem é obrigatória!", {
         type: "error",
       });
       return;
     }
+
+    if (!pet.color) {
+      toast("Cor é obrigatória!", {
+        type: "error",
+      });
+      return;
+    }
+
     handleSubmit(pet);
   }
 
@@ -64,7 +73,6 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
           </div>
 
           <Input
-            required={true}
             text="Imagem"
             type="file"
             fileType="image"
@@ -85,9 +93,9 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
 
           <Input
             required={true}
-            text="Idade"
+            text="Idade (Meses)"
             type="number"
-            placeholder="Digite a idade"
+            placeholder="Digite a idade em meses"
             name="age"
             handleChange={handleChange}
             value={pet.age || ""}

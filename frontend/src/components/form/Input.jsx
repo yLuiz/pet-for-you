@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Input.module.css';
+import InputMask from 'react-input-mask';
 import { GrGallery } from 'react-icons/gr';
 
-export default function Input({ type = 'text', fileType = '', disabled = false, text, name, placeholder, handleChange, value, multiple, required = false }) {
+export default function Input({ mask, type = 'text', fileType = '', disabled = false, text, name, placeholder, handleChange, value, multiple, required = false }) {
   return (
 
     (type === 'file' && fileType === 'image') ? 
@@ -30,7 +31,8 @@ export default function Input({ type = 'text', fileType = '', disabled = false, 
     :
 
     <div className={styles.form_control}>
-      <input
+      <InputMask
+        mask={mask}
         type={type} 
         name={name} 
         id={name}
@@ -43,5 +45,20 @@ export default function Input({ type = 'text', fileType = '', disabled = false, 
       />
       <label htmlFor={name}>{text}</label>
     </div>
+
+    // <div className={styles.form_control}>
+    //   <input
+    //     type={type} 
+    //     name={name} 
+    //     id={name}
+    //     required={required}
+    //     placeholder={' '} 
+    //     onChange={handleChange}
+    //     value={value}
+    //     disabled={disabled}
+    //     {...(multiple ? { multiple } : '')}
+    //   />
+    //   <label htmlFor={name}>{text}</label>
+    // </div>
   )
 }
