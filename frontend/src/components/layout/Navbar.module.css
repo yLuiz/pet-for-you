@@ -181,6 +181,13 @@
   }
 }
 
+@media (max-width: 414px) {
+  
+  .navbar_logo h2 {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 294px) {
   .navbar_logo h2 {
     display: none;

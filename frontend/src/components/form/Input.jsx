@@ -42,7 +42,7 @@ export default function Input({ onKeydown, handleFocusOut, mask, type = 'text', 
         value={value}
         disabled={disabled}
         onBlur={handleFocusOut}
-        onKeydown={onKeydown}
+        onKeyDown={onKeydown}
       />
       <label htmlFor={name}>{text}</label>
     </div>
