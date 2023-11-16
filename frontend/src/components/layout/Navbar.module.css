@@ -8,6 +8,12 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+
   padding: 1em 1.5em;
   background-color: var(--bg-color);
   color: var(--text-white-color);

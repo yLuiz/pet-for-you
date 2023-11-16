@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Container from './components/layout/Container';
 import Message from './components/layout/Message';
@@ -20,34 +20,58 @@ import MyAdoptions from './components/pages/Pet/MyAdoptions';
 import MyPets from './components/pages/Pet/MyPets';
 import PetDetails from './components/pages/Pet/PetDetails';
 import { UserProvider } from './context/UserContext';
+import PrivateRoutes from './guards/Private';
 
 function App() {
+
   return (
+
     <div className="App">
       <Router>
         <UserProvider>
-          <Navbar />
-          <Message />
-          <Container>
-            <Routes>
-              <Route path='user/profile' element={ <Profile />}></Route>
-              <Route path='/' element={ <Home />}></Route>
-              <Route path='/login' element={ <Login />}></Route>
-              <Route path='/register' element={ <Register />}></Route>
-              <Route path='/allUsers' element={ <Navigate to="/users" />}></Route>
-              <Route path='/pet/mypets' element={ <MyPets /> }></Route>
-              <Route path='/pet/add' element={ <AddPet /> }></Route>
-              <Route path='/pet/edit/:id' element={ <EditPet /> }></Route>
-              <Route path='/pet/:id' element={ <PetDetails /> }></Route>
-              <Route path='/pet/myadoptions' element={ <MyAdoptions /> }></Route>
+          <Routes>
+            <Route element={<PrivateRoutes />}>
+              <Route path='user/profile' element={ <Profile />} />
+              <Route path='/' element={ <Home />} />
+              <Route path='/allUsers' element={ <Navigate to="/users" />} />
+              <Route path='/pet/mypets' element={ <MyPets /> } />
+              <Route path='/pet/add' element={ <AddPet /> } />
+              <Route path='/pet/edit/:id' element={ <EditPet /> } />
+              <Route path='/pet/:id' element={ <PetDetails /> } />
+              <Route path='/pet/myadoptions' element={ <MyAdoptions /> } />
               <Route path='*' element={<Navigate to='/' />} />
-            </Routes>
-          </Container>
+            </Route>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Routes>
         </UserProvider>
       </Router>
     </div>
+
+    // <div className="App">
+    //   <Router>
+    //     <UserProvider>
+    //       <Navbar />
+    //       <Message />
+    //       <Container>
+    //         <Routes>
+    //           <Route path='/login' element={ <Login />} />
+    //           <Route path='/register' element={ <Register />} />
+    //           <Route path='user/profile' element={ <Profile />} />
+    //           <Route path='/' element={ <Home />} />
+    //           <Route path='/allUsers' element={ <Navigate to="/users" />} />
+    //           <Route path='/pet/mypets' element={ <MyPets /> } />
+    //           <Route path='/pet/add' element={ <AddPet /> } />
+    //           <Route path='/pet/edit/:id' element={ <EditPet /> } />
+    //           <Route path='/pet/:id' element={ <PetDetails /> } />
+    //           <Route path='/pet/myadoptions' element={ <MyAdoptions /> } />
+    //           <Route path='*' element={<Navigate to='/' />} />
+    //         </Routes>
+    //       </Container>
+    //     </UserProvider>
+    //   </Router>
+    // </div>
   );
 }
 
 export default App;
-  
