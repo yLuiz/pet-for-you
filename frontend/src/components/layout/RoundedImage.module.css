@@ -10,3 +10,11 @@
   width: 75px;
   height: 75px;
 }
+
+.none_image_template {
+  font-size: 3.5rem;
+}
+
+.none_image_template svg path {
+  stroke: #8f8f8f;
+}

@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+Figuranhas de Dogs:
+<a href="https://www.flaticon.com/br/stickers-gratis/reino-animal" title="reino animal figurinhas">Reino animal figurinhas criadas por MrHamster - Flaticon</a>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

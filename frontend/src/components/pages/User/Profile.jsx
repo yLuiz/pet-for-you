@@ -84,14 +84,13 @@ export default function Profile() {
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
         {
-          (user.image || preview) ? 
+          
           (
             <RoundedImage
-              src={preview ? URL.createObjectURL(preview) : 
-              `${environment.REACT_APP_API}/images/users/${user.image}`} 
+              src={preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`} 
               alt={`Foto ${user.name}`} 
             />
-          ) : null
+          )
         }
       </div>
       <form onSubmit={handleSubmit}>

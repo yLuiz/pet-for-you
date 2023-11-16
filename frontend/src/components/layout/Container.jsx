@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styles from './Container.module.css';
+import Navbar from './Navbar';
 import { Context } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,8 +19,11 @@ export default function Container({ children }) {
   }, [location]);
 
   return (
-    <main className={styles.container}>
-      { children }
-    </main>
+      <>
+        <Navbar />
+        <main className={styles.container}>
+          { children }
+        </main>
+      </>
   )
 }
