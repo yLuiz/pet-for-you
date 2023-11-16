@@ -21,9 +21,6 @@ export default function Login() {
   });
 
   function handleViewPassword(field) {
-
-    console.log(field);
-
     setIsShowingPassword({
       ...isShowingPassword,
       [field]: !isShowingPassword[field]

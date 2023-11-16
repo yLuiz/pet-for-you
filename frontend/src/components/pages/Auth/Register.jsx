@@ -36,8 +36,6 @@ export default function Register() {
 
   function handleViewPassword(field) {
 
-    console.log(field);
-
     setIsShowingPassword({
       ...isShowingPassword,
       [field]: !isShowingPassword[field]

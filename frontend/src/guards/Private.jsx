@@ -7,10 +7,6 @@ export default function PrivateRoutes() {
 
     const { authenticated } = useContext(Context);
 
-    useEffect(() => {
-        console.log(authenticated)
-    })
-
     return (
         <>
             { authenticated ? 
