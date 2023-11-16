@@ -13,31 +13,31 @@ module.exports = class UserController {
     
     const { name, email, phone, password, confirmpassword } = req.body;
 
-    if(!name) {
+    if(!name.trim()) {
       return res.status(422).json({
         message: 'O nome é obrigatório!'
       })
     }
 
-    if(!email) {
+    if(!email.trim()) {
       return res.status(422).json({
         message: 'O e-mail é obrigatório!'
       })
     }
 
-    if(!password) {
+    if(!password.trim()) {
       return res.status(422).json({
         message: 'A senha é obrigatória!'
       })
     }
 
-    if(!confirmpassword) {
+    if(!confirmpassword.trim()) {
       return res.status(422).json({
         message: 'A confirmação de senha é obrigatória!'
       })
     }
 
-    if(!phone) {
+    if(!phone.trim()) {
       return res.status(422).json({
         message: 'O telefone é obrigatório!'
       })
@@ -81,13 +81,13 @@ module.exports = class UserController {
   static async login(req, res) {
     const { email, password } = req.body;
 
-    if(!email) {
+    if(!email.trim()) {
       return res.status(422).json({ 
         message: 'O e-mail é obrigatório!' 
       })
     }
     
-    if(!password) {
+    if(!password.trim()) {
       return res.status(422).json({ 
         message: 'A senha é obrigatória!' 
       })
