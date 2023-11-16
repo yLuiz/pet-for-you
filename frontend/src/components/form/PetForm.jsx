@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import environment from '../../environment/environment';
-import useFlashMessage from '../../hooks/useFlashMessage';
 import formStyles from './Form.module.css';
 import Input from './Input';
 import Select from './Select';
+import { toast } from 'react-toastify';
 
 export default function PertForm({ handleSubmit, petData, btnText, loading }) {
 
   const [pet, setPet] = useState(petData || {});
-  const { setFlashMessage } = useFlashMessage();
+
   const [preview, setPreview] = useState([]);
   const colors = ["Branco", "Preto", "Cinza", "Caramelo", "Mesclado"];
 
@@ -29,8 +29,9 @@ export default function PertForm({ handleSubmit, petData, btnText, loading }) {
   function submit(event) {
     event.preventDefault();
     if (!pet.color) {
-      
-      setFlashMessage("Imagem é obrigatória!", "error");
+      toast("Imagem é obrigatória!", {
+        type: 'error'
+      });
       return;
     }
     handleSubmit(pet);

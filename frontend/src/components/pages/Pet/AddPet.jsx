@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import styles from './AddPet.module.css';
 import api from '../../../utils/api';
-import useFlashMessage from '../../../hooks/useFlashMessage';
 import PetForm from '../../form/PetForm';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function AddPet() {
 
   const [token] = useState(localStorage.getItem('token') || null);
-  const { setFlashMessage } = useFlashMessage();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -28,7 +27,9 @@ export default function AddPet() {
 
     if (loading) {
 
-      setFlashMessage("Aguarde o pet ser cadastrado.", "error");
+      toast('Aguarde o pet ser cadastrado.', {
+        type: 'error'
+      });
 
       return;
     };
@@ -40,13 +41,17 @@ export default function AddPet() {
       }
     }
     )
-    .then(response => {
-      setFlashMessage(response.data.message, "success"); 
+    .then(response => { 
+      toast(response.data.message, {
+        type: 'success'
+      });
       navigate('/pet/mypets');
       return response.data.data;
     })
     .catch(err => {
-      setFlashMessage(err.response.data.error, "error");
+      toast(err.response.data.error, {
+        type: 'error'
+      });
       console.error(err);
       return err.response.data;
     })

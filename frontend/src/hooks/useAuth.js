@@ -1,13 +1,13 @@
 import api from '../utils/api';
-import useFlashMessage from './useFlashMessage';
+import { jwtDecode } from 'jwt-decode';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,8 +34,6 @@ export default function useAuth() {
       });
 
       await authUser(data);
-
-      setFlashMessage(msgText, msgType);
     } catch (err) {
       msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
@@ -43,7 +41,14 @@ export default function useAuth() {
       console.error(err);
       
       setLoading(false);
-      setFlashMessage(msgText, msgType);
+      
+    }
+    finally {
+      toast(msgText, {
+        type: msgType,
+        autoClose: 1000,
+        closeOnClick: true,
+      });
     }
   }
   
@@ -68,20 +73,48 @@ export default function useAuth() {
       msgType = 'error';
     }
 
-    setFlashMessage(msgText, msgType);
+    toast(msgText, {
+      type: msgType
+    });
   }
 
   function logout() {
     const msgText = "Logout realizado com sucesso";
     const msgType = 'success';
-
     setAuthenticated(false);
     localStorage.removeItem('token');
     api.defaults.Authorization = undefined;
     navigate('/login');
 
-    setFlashMessage(msgText, msgType);
+    
+    toast(msgText, {
+      type: msgType,
+      autoClose: 1000,
+      closeOnClick: true,
+    });
+    
   }
 
-  return { authenticated, register, logout, login, loading };
+  function isValidToken(token) {
+    if (!token) return false;
+
+    try {
+
+      const tokenParsed = JSON.parse(token);
+
+      const tokenDecoded = jwtDecode(tokenParsed);
+      if (Date.now() >= tokenDecoded.exp * 1000) {
+        return false;
+      }
+
+      return true;
+    }
+    catch (error) {
+      console.error(error);
+      return false;
+    }
+
+  }
+
+  return { authenticated, register, logout, login, loading, isValidToken, setAuthenticated };
 }

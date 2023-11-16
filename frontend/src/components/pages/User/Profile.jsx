@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useFlashMessage from '../../../hooks/useFlashMessage';
 import api from '../../../utils/api';
 import formStyles from '../../form/Form.module.css';
 import Input from '../../form/Input';
@@ -10,6 +9,7 @@ import styles from './Profile.module.css';
 import { Context } from '../../../context/UserContext';
 import { useContext } from 'react';
 import environment from '../../../environment/environment';
+import { toast } from 'react-toastify';
 
 export default function Profile() {
 
@@ -18,7 +18,6 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [preview, setPreview] = useState();
   const [token] = useState(localStorage.getItem('token' || ''));
-  const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function Profile() {
         setUser(response.data.data);
       })
     }
-  }, [token])
+  }, [authenticated, navigate, token])
 
   function handleChange(e) {
     setUser({...user, [e.target.name]: e.target.value});
@@ -75,7 +74,9 @@ export default function Profile() {
       setLoading(false);
     })
 
-    setFlashMessage(data.message, msgType);
+    toast(data.message, {
+      type: msgType
+    });
   }
 
   return (

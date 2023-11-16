@@ -149,6 +149,11 @@
   animation: prixClipFix 2s linear infinite ;
 }
 
+button:disabled {
+  border-color: #cecece !important;
+  color: #cecece;
+}
+
 @keyframes rotate {
   100%   {transform: rotate(360deg)}
 }

@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../../utils/api';
 import PetForm from '../../form/PetForm';
-import useFlashMessage from '../../../hooks/useFlashMessage';
 import styles from './Dashboard.module.css';
+import { toast } from 'react-toastify';
 
 
 export default function EditPet() {
 
   const [pet, setPets] = useState({});
-  const { setFlashMessage } = useFlashMessage();
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
@@ -29,12 +29,18 @@ export default function EditPet() {
 
     setLoading(true);
     await api.patch('pets/' + id, formData).then(response => {
-      setFlashMessage(response.data.message, "success"); 
+
+      toast(response.data.message, {
+        type: 'success'
+      });
       navigate('/pet/mypets');
       return response.data.data;
     })
     .catch(err => {
-      setFlashMessage(err.response.data.error, "error");
+
+      toast(err.response.data.error, {
+        type: 'error'
+      });
       console.error(err);
       return err.response.data;
     })

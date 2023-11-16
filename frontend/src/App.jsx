@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Container from './components/layout/Container';
-import Message from './components/layout/Message';
 import Navbar from './components/layout/Navbar';
 import Login from './components/pages/Auth/Login';
 import Register from './components/pages/Auth/Register';
@@ -14,6 +13,21 @@ import Profile from './components/pages/User/Profile';
    - Switch to Routes
 */
 
+/* 
+
+toastOptions = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+}
+
+*/
+
 import AddPet from './components/pages/Pet/AddPet';
 import EditPet from './components/pages/Pet/EditPet';
 import MyAdoptions from './components/pages/Pet/MyAdoptions';
@@ -22,11 +36,20 @@ import PetDetails from './components/pages/Pet/PetDetails';
 import { UserProvider } from './context/UserContext';
 import PrivateRoutes from './guards/Private';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   return (
 
     <div className="App">
+
+      <ToastContainer 
+          limit={2}
+          autoClose={2500}
+          hideProgressBar={false}
+      />
       <Router>
         <UserProvider>
           <Routes>

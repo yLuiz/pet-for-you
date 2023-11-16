@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from '../../../utils/api'
 import styles from './PetDetails.module.css';
-import useFlashMessage from "../../../hooks/useFlashMessage";
 import { useState } from "react";
 import { REACT_APP_API } from "../../../environment/environment";
+import { toast } from "react-toastify";
 
 export default function PetDetails() {
 
   const [token] = useState(localStorage.getItem('token') || null);
   const [pet, setPet] = useState({});
   const { id } = useParams();
-  const { setFlashMessage } = useFlashMessage();
 
   const headers = {
     'Authorization': `Bearer ${JSON.parse(token)}`
@@ -20,11 +19,15 @@ export default function PetDetails() {
   async function schedule() {
     await api.patch(`pets/schedule/${pet._id}`, null, { headers })
     .then(response => {
-      setFlashMessage(response.data.message, 'success')
+      toast(response.data.message, {
+        type: 'succes'
+      });
     })
     .catch(err => {
       console.error(err);
-      setFlashMessage(err.response.data.message, 'error');
+      toast(err.response.data.message || 'Houve um error ao concluir a ação', {
+        type: 'error'
+      });
     });
   }
 
@@ -32,9 +35,13 @@ export default function PetDetails() {
     (async () => {
       await api.get(`/pets/${id}`, { headers })
       .then(response => setPet(response.data.pet))
-      .catch(err => setFlashMessage(err.response.message, 'error'));
+      .catch(err => {
+        toast(err.response.message, {
+          type: 'error'
+        }); 
+      });
     })()
-  }, []);
+  });
 
 
   return (

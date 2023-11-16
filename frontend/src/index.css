@@ -15,13 +15,18 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #eee;
+}
+
 h1 {
   color: var(--text-bg-color);
   margin-bottom: 1em;
   font-size: 2.1em;
 }
 
-input:not([type= "submit"]):focus {
+input:not([type= "submit"]):focus,
+input:not(:placeholder-shown) {
   border-color: var(--text-bg-color);
   box-shadow: 0 0 3px var(--text-bg-color);
 }
