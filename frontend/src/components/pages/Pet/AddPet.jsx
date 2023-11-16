@@ -26,7 +26,6 @@ export default function AddPet() {
     setLoading(true);
 
     if (loading) {
-
       toast('Aguarde o pet ser cadastrado.', {
         type: 'error'
       });
@@ -49,8 +48,9 @@ export default function AddPet() {
       return response.data.data;
     })
     .catch(err => {
-      toast(err.response.data.error, {
-        type: 'error'
+      toast(err.response.data.error || 'Houve um erro ao fazer o cadastro, verifique se os campos estão preenchidos corretamente.', {
+        type: 'error',
+        autoClose: 2500
       });
       console.error(err);
       return err.response.data;
