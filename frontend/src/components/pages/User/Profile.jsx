@@ -10,6 +10,8 @@ import { Context } from '../../../context/UserContext';
 import { useContext } from 'react';
 import environment from '../../../environment/environment';
 import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 export default function Profile() {
 
@@ -19,14 +21,18 @@ export default function Profile() {
   const [preview, setPreview] = useState();
   const [token] = useState(localStorage.getItem('token' || ''));
   const navigate = useNavigate();
+  const [isShowingPassword, setIsShowingPassword] = useState({
+    password: false,
+    confirmpassword: false,
+  });
 
   useEffect(() => {
 
-    if(!authenticated) navigate('/login');
+    if (!authenticated) navigate('/login');
 
     else {
       api.get('/users/checkuser', {
-        headers: { 
+        headers: {
           'Authorization': `Bearer ${JSON.parse(token)}`
         }
       }).then(response => {
@@ -35,12 +41,20 @@ export default function Profile() {
     }
   }, [authenticated, navigate, token])
 
+  function handleViewPassword(field) {
+
+    setIsShowingPassword({
+      ...isShowingPassword,
+      [field]: !isShowingPassword[field]
+    });
+  }
+
   function handleChange(e) {
-    setUser({...user, [e.target.name]: e.target.value});
+    setUser({ ...user, [e.target.name]: e.target.value });
   }
 
   function onFileChange(e) {
-    setUser({...user, [e.target.name]: e.target.files[0]});
+    setUser({ ...user, [e.target.name]: e.target.files[0] });
     setPreview(e.target.files[0]);
   }
 
@@ -63,16 +77,16 @@ export default function Profile() {
       navigate('/');
       return response.data;
     })
-    .catch(err => {
+      .catch(err => {
 
-      console.error(err);
+        console.error(err);
 
-      msgType = 'error';
-      return err.response.data;
-    })
-    .finally(() => {
-      setLoading(false);
-    })
+        msgType = 'error';
+        return err.response.data;
+      })
+      .finally(() => {
+        setLoading(false);
+      })
 
     toast(data.message, {
       type: msgType
@@ -84,19 +98,20 @@ export default function Profile() {
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
         {
-          
+
           (
             <RoundedImage
-              src={preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`} 
-              alt={`Foto ${user.name}`} 
+              src={preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`}
+              alt={`Foto ${user.name}`}
             />
           )
         }
       </div>
       <form onSubmit={handleSubmit}>
         <div className={formStyles.form_inputs}>
-          <Input 
+          <Input
             text="Imagem"
+            fileType='image'
             type="file"
             name="image"
             handleChange={onFileChange}
@@ -112,6 +127,7 @@ export default function Profile() {
 
           <Input
             text="Telefone"
+            mask={'(99) 9 9999-9999'}
             type="text"
             name="phone"
             value={user.phone || ''}
@@ -128,23 +144,41 @@ export default function Profile() {
             handleChange={handleChange}
           />
 
-          <Input
-            text="Senha"
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-            handleChange={handleChange}
-          />
+          <div className={formStyles.password_input}>
+            <Input
+              required={true}
+              text="Senha"
+              type={isShowingPassword['password'] ? 'text' : 'password'}
+              name="password"
+              placeholder="Digite sua senha"
+              handleChange={handleChange}
+            />
+            <button type='button' onClick={() => handleViewPassword('password')}>
+              {isShowingPassword['password'] ?
+                <FaEyeSlash />
+                : <FaEye />
+              }
+            </button>
+          </div>
 
-          <Input
-            text="Confirmação de senha"
-            type="password"
-            name="confirmpassword"
-            placeholder="Confirme sua senha"
-            handleChange={handleChange}
-          />
+          <div className={formStyles.password_input}>
+            <Input
+              required={true}
+              text="Confirmação de senha"
+              type={isShowingPassword['confirmpassword'] ? 'text' : 'password'}
+              name="confirmpassword"
+              placeholder="Confirme sua senha"
+              handleChange={handleChange}
+            />
+            <button type='button' onClick={() => handleViewPassword('confirmpassword')}>
+              {isShowingPassword['confirmpassword'] ?
+                <FaEyeSlash />
+                : <FaEye />
+              }
+            </button>
+          </div>
           <button disabled={loading} type="submit">
-            { loading ? <span className={formStyles.loader}></span> : 'Editar' }
+            {loading ? <span className={formStyles.loader}></span> : 'Editar'}
           </button>
         </div>
       </form>

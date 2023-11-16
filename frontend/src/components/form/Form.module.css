@@ -83,8 +83,50 @@
 /* form de pets */
 .preview_pet_images {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 1em;
+  max-width: 400px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: 5px 30px;
+
+  border-radius: 8px;
+}
+
+/* Password input */
+
+.form_container .password_input {
+  position: relative;
+  width: 100%;
+}
+
+.form_container .password_input input {
+  padding-right: 40px;
+}
+
+.form_container .password_input button {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-bg-color);
+}
+
+.form_container .password_input button {
+  font-size: 1rem;
+}
+
+/* FIM Password input */
+
+.preview_pet_images::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.preview_pet_images::-webkit-scrollbar-thumb {
+  background-color: #cecece;
+  border-radius: 12px;
 }
 
 .preview_pet_images img {

@@ -101,6 +101,23 @@ export default function useAuth() {
     
   }
 
+ function getUserInformation() {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) return null;
+
+      const tokenParsed = JSON.parse(token);
+
+      const tokenDecoded = jwtDecode(tokenParsed);
+      return tokenDecoded;
+    }
+    catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+
   function isValidToken(token) {
     if (!token) return false;
 
@@ -122,5 +139,5 @@ export default function useAuth() {
 
   }
 
-  return { authenticated, register, logout, login, loading, isValidToken, setAuthenticated };
+  return { authenticated, register, logout, login, loading, isValidToken, setAuthenticated, getUserInformation };
 }

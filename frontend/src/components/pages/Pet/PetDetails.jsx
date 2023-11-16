@@ -32,16 +32,16 @@ export default function PetDetails() {
   }
 
   useEffect(() => {
-    (async () => {
-      await api.get(`/pets/${id}`, { headers })
+    
+      api.get(`/pets/${id}`, { headers })
       .then(response => setPet(response.data.pet))
       .catch(err => {
         toast(err.response.message, {
           type: 'error'
         }); 
       });
-    })()
-  });
+    
+  }, []);
 
 
   return (

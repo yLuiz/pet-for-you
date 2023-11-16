@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 const Context = createContext();
 
 function UserProvider({ children }) {
-  const { login, register, authenticated, logout, loading, isValidToken, setAuthenticated } = useAuth();
+  const { login, register, authenticated, logout, loading, isValidToken, setAuthenticated, getUserInformation } = useAuth();
   
 
   return (
@@ -16,7 +16,8 @@ function UserProvider({ children }) {
         authenticated, 
         loading,
         isValidToken,
-        setAuthenticated
+        setAuthenticated,
+        getUserInformation
       }
     }>
       { children }
