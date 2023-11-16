@@ -84,7 +84,7 @@ export default function MyPets() {
           <>
             <p>Meus Pets cadastrados</p>
             <div>
-              {pets.map((pet) => (
+              { pets.map((pet) => (
                 <div className={styles.petlist_row} key={pet._id}>
                   <RoundedImage
                     key={pet.images[0]}
