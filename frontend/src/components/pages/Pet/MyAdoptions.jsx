@@ -40,6 +40,7 @@ export default function MyAdoptions() {
     <section>
       <div className={styles.petslist_header}>
         <h1>Minhas adoções!</h1>
+        <p>Aqui você pode visualizar suas adoções e seus detalhes.</p>
       </div>
       <div className={`${styles.petslist_container} ${styles.gridAuto}`}>
         {pets.length
@@ -53,7 +54,7 @@ export default function MyAdoptions() {
                     src={`${environment.REACT_APP_API}/images/pets/${pet.images[0]}`}
                     alt={pet.name}
                     className={styles.image}
-                    width="px75"
+                    size="75px"
                   />
                   <span className="bold">{pet.name}</span>
 

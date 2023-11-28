@@ -76,6 +76,7 @@ export default function MyPets() {
     <section>
       <div className={styles.petslist_header}>
         <h1>Meus Pets</h1>
+        <p>Aqui você pode visualizar e editar seus pets postados.</p>
         <Link to="/pet/add">Cadastrar Pet</Link>
       </div>
 

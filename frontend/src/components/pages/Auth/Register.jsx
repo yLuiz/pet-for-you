@@ -27,9 +27,9 @@ export default function Register() {
   }, [authenticated, setAuthenticated]);
 
   function handleFocusOutName(event) {
-    event.target.value = event.target.value.trim();
+    event.target.value = event.target.value.trimStart().trimEnd();
 
-    if(((/[^a-zA-Z\s]+/).test(event.target.value)) && event.target.value.length) {
+    if(((/[^a-zA-Zà-úÀ-Ú\s]+/).test(event.target.value)) && event.target.value.length) {
       event.target.value = ''
       toast(`Insira apenas letras`, {
         type: "error",

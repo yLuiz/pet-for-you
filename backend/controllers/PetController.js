@@ -126,7 +126,12 @@ module.exports = class PetController {
     return Pet.findOneAndRemove(_id)
       .then(() => {
         pet.images.map(image => {
-          promisify(fs.unlink)(path.resolve(__dirname, '..', 'public', 'images', 'pets', image))
+          try {
+            promisify(fs.unlink)(path.resolve(__dirname, '..', 'public', 'images', 'pets', image))
+          }
+          catch (error) {
+            console.error(error);
+          }
         })
 
         return res.status(200).json({ message: "Pet deletado!", pet });
@@ -147,9 +152,12 @@ module.exports = class PetController {
     const user = await getUserByToken(token, User);
 
     if (pet.user._id.toString() !== user._id.toString()) {
+      console.log(pet);
+      console.log(user);
+
       return res
-        .status(422)
-        .json({ message: "Hoveu um problema na solicitação!" });
+        .status(400)
+        .json({ message: "Você não é o responsável por esse pet!" });
     }
 
     const { name, age, weight, color, available } = req.body;

@@ -1,11 +1,15 @@
-import { useContext, useEffect } from "react";
-import { Context } from "../context/UserContext";
-import Container from "../components/layout/Container";
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import Container from "../components/layout/Container";
+
+import { Context } from "../context/UserContext";
+
 
 export default function PrivateRoutes() {
 
     const { authenticated } = useContext(Context);
+
+    
 
     return (
         <>

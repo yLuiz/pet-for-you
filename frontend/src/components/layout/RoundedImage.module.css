@@ -6,11 +6,6 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.rounded_image.px75 {
-  width: 75px;
-  height: 75px;
-}
-
 .none_image_template {
   font-size: 3.5rem;
 }
