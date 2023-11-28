@@ -11,14 +11,53 @@
 }
 
 .pet_images {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
   margin-bottom: 1em;
 }
 
+.pet_images::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 100%;
+  background-image: linear-gradient(to right, #ffffff, transparent);
+  left: 0;
+  top: 0;
+}
+
+.pet_images::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 100%;
+  background-image: linear-gradient(to left, #ffffff, transparent);
+  right: 0;
+  top: 0;
+}
+
 .pet_images img {
-  max-height: 200px;
+  object-fit: cover;
+  max-width: 100px;
+  height: 100px;
   margin-right: 1em;
+  border-radius: 50%;
+}
+
+.pet_images_carousel {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  max-width: 500px;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .pet_details_container button {
@@ -36,4 +75,81 @@
 
 .pet_details_container button:hover {
   background-color: #1c8a42;
+}
+
+.owner_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.owner_content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border-radius: 8px;
+  max-width: 500px;
+  gap: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.owner_content p {
+  font-size: 0.8em;
+}
+
+.owner_informations {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.skeleton_container {
+  border-radius: 8px;
+  max-width: 300px;
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.loader_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: full;
+  margin: 30px 0;
+}
+
+.loader {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-color);
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+  25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+  100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }

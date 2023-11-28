@@ -1,13 +1,21 @@
 .petslist_header {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 8px;
+
   margin-bottom: 2em;
 }
 
 .petslist_header h1 {
   margin: 0;
 }
+
+.petslist_header p {
+  margin: 10px 0 20px;
+}
+
 
 .petslist_header a {
   text-decoration: none;
@@ -145,7 +153,7 @@
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 3px solid #00aaff;
+  border: 3px solid var(--bg-color);
   animation: prixClipFix 2s linear infinite ;
 }
 

@@ -3,6 +3,10 @@
   margin-bottom: 1rem;
 }
 
+.profile_header p {
+  margin: 5px 0;
+}
+
 .loader {
   width: 18px;
   height: 18px;

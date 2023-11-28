@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../../utils/api';
 import formStyles from '../../form/Form.module.css';
 import Input from '../../form/Input';
 import RoundedImage from '../../layout/RoundedImage';
 import styles from './Profile.module.css';
 
-import { Context } from '../../../context/UserContext';
 import { useContext } from 'react';
-import environment from '../../../environment/environment';
-import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
+import { Context } from '../../../context/UserContext';
+import environment from '../../../environment/environment';
 
 
 export default function Profile() {
@@ -30,12 +30,13 @@ export default function Profile() {
 
     if (!authenticated) navigate('/login');
 
-    else {
+    else {      
       api.get('/users/checkuser', {
         headers: {
           'Authorization': `Bearer ${JSON.parse(token)}`
         }
-      }).then(response => {
+      })
+      .then(response => {
         setUser(response.data.data);
       })
     }
@@ -98,11 +99,11 @@ export default function Profile() {
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
         {
-
           (
             <RoundedImage
-              src={preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`}
+              src={ preview ? URL.createObjectURL(preview) : `${environment.REACT_APP_API}/images/users/${user.image}`}
               alt={`Foto ${user.name}`}
+              size='200px'
             />
           )
         }
@@ -180,6 +181,9 @@ export default function Profile() {
           <button disabled={loading} type="submit">
             {loading ? <span className={formStyles.loader}></span> : 'Editar'}
           </button>
+          <Link className={formStyles.backButton} to="/pet/mypets">
+            Voltar
+          </Link>
         </div>
       </form>
     </section>
