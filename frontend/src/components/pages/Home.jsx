@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/UserContext';
 import environment from '../../environment/environment';
 import api from '../../utils/api';
@@ -10,9 +10,17 @@ export default function Home() {
 
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { getUserInformation } = useContext(Context);
+  const { getUserInformation, isValidToken } = useContext(Context);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    const token = localStorage.getItem('token');
+
+    if (!isValidToken(token)) {
+      navigate('/login');
+    }
+
     api.get('pets')
       .then(response => {
 

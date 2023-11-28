@@ -30,10 +30,14 @@ export default function useAuth() {
         
         setLoading(false);
 
-        return response.data;
+        console.log(data);
+
+        return 'response.data';
       });
 
-      await authUser(data);
+      
+
+      // await authUser(data);
     } catch (err) {
       msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
