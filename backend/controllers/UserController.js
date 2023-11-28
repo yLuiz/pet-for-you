@@ -65,7 +65,8 @@ module.exports = class UserController {
       name,
       email,
       phone,
-      password: passwordHash
+      password: passwordHash,
+      image: 'unknown-profile.webp'
     })
 
     try {

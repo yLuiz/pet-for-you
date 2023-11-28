@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const MONGODB_URL = process.env.MONGODB_URL;
 
 async function main() {
-  await mongoose.connect(MONGODB_URL, {
-    dbName: 'adopt_pet'
+  mongoose.connect(MONGODB_URL, {
+    dbName: 'pet_for_you'
   });
   console.log("Connected to Mongoose!"); 
 }
