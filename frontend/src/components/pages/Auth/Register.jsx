@@ -52,7 +52,8 @@ export default function Register() {
   }
 
   function handleChange(e) {
-    const value = e.target.value.replace(' ', '');
+
+    const value = e.target.value.trim();
 
     setUser({ ...user, [e.target.name]: value })
   }

@@ -172,7 +172,9 @@
     top: 0px;
     left: 0px;
     width: 100vw;
-    height: 60vh;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: var(--bg-color-opacity-95);
   }
 

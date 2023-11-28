@@ -30,7 +30,7 @@ export default function PertForm({ createPet = false, handleSubmit, petData, btn
   function handleFocusOutName(event) {
     event.target.value = event.target.value.trim();
 
-    if(((/[^a-zA-Z\s]+/).test(event.target.value)) && event.target.value) {
+    if(((/[^a-zA-Zà-úÀ-Ú\s]+/).test(event.target.value)) && event.target.value) {
       event.target.value = ''
       toast(`Insira apenas letras`, {
         type: "error",
