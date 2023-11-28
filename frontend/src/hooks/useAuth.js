@@ -26,18 +26,12 @@ export default function useAuth() {
 
       setLoading(true);
 
-      const data = await api.post('/users/login', user).then(response => {
+      const data = (await api.post('/users/login', user)).data;
         
-        setLoading(false);
+      setLoading(false);
 
-        console.log(data);
+      await authUser(data);
 
-        return 'response.data';
-      });
-
-      
-
-      // await authUser(data);
     } catch (err) {
       msgText = err.response.data.message || "Credênciais inválidas";
       msgType = "error";
